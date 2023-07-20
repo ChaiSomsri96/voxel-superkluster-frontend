@@ -4,6 +4,7 @@ import { TableDiv, OfferUserLink } from "./styled-components";
 import { shortenWalletAddress, calculateExpiredTime } from "./../../utils";
 import { Table } from 'antd';
 import NoData from './NoData';
+import { usdPriceItemDetailPage, formatUSDPrice } from "./../../utils";
 
 const Listings = ({nftId, usdPrice}) => {
     const customLocale = {
@@ -17,13 +18,13 @@ const Listings = ({nftId, usdPrice}) => {
             key: 'unit_price',
             title: 'Price',
             dataIndex: 'unit_price',
-            render: unit_price => <TableDiv>{ parseInt(unit_price / usdPrice) } VXL</TableDiv>
+            render: unit_price => <TableDiv>{ formatUSDPrice(parseInt(unit_price / usdPrice)) } VXL</TableDiv>
         },
         {
             key: 'usd_price',
             title: 'USD Price',
             dataIndex: 'unit_price',
-            render: unit_price => <TableDiv> ${unit_price}</TableDiv>
+            render: unit_price => <TableDiv>{usdPriceItemDetailPage(unit_price)} USD</TableDiv>
         },
         {
             key: 'expiration',
@@ -58,7 +59,7 @@ const Listings = ({nftId, usdPrice}) => {
     return (
         <div style={{ borderRadius: '6px', overflow: 'hidden' }}>
             <Table
-                className='item-detail-table'
+                className='item-detail-table listing-table'
                 columns={columns}
                 locale={customLocale}
                 style={{ overflowX: 'auto' }}

@@ -7,6 +7,7 @@ import NoData from './NoData';
 import * as selectors from "./../../store/selectors";
 import * as actions from "./../../store/actions/thunks";
 import {useSelector, useDispatch } from "react-redux";
+import { usdPriceItemDetailPage, formatUSDPrice } from "./../../utils";
 
 const Offers = ({nftId, usdPrice}) => {
     const dispatch = useDispatch();
@@ -22,13 +23,13 @@ const Offers = ({nftId, usdPrice}) => {
             key: 'price',
             title: 'Price',
             dataIndex: 'price',
-            render: price => <TableDiv>{ parseInt(price / usdPrice) } VXL</TableDiv>
+            render: price => <TableDiv>{ formatUSDPrice(parseInt(price / usdPrice) ) } VXL</TableDiv>
         },
         {
             key: 'usd_price',
             title: 'USD Price',
             dataIndex: 'price',
-            render: price => <TableDiv> ${price}</TableDiv>
+            render: price => <TableDiv>{usdPriceItemDetailPage(price)} USD</TableDiv>
         },
         {
             key: 'floor_differences',
@@ -63,7 +64,7 @@ const Offers = ({nftId, usdPrice}) => {
     return (
         <div style={{ borderRadius: '6px', overflow: 'hidden' }}>
             <Table
-                className='item-detail-table'
+                className='item-detail-table offer-table'
                 columns={columns}
                 locale={customLocale}
                 style={{ overflowX: 'auto' }}

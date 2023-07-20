@@ -19,8 +19,10 @@ const ItemInfo = ({itemData, colormodesettle}) => {
 
     return (
         <>
-            <NFTName>{itemData.name}</NFTName>
-            <div className='spacing'></div>
+            <div className='nft-name'>
+                <NFTName>{itemData.name}</NFTName>
+                <div className='spacing'></div>
+            </div>
             <div className='owner-ship'>
                 <div className="flex-align-center">
                     <div className="item-avatar">

@@ -75,14 +75,26 @@ const ItemDetailPage = ({ nftId, colormodesettle }) => {
                     <div className="left-side-section">
                         <AssetShow itemData={itemData} colormodesettle={colormodesettle} />
                         <div className="spacing"></div>
+                        
+                        {
+                            /*
+                            <div className="nft-name-mobile">
+                                <ItemInfo itemData={itemData} colormodesettle={colormodesettle} />
+                                <ToolBar itemData={itemData} colormodesettle={colormodesettle} nftId={nftId} />
+                                <div className="spacing"></div>
+                            </div>
+                            */
+                        }
                         <TabPanel itemData={itemData} />
                     </div>
 
                     <div className="right-side-section">
-                        <ItemInfo itemData={itemData} colormodesettle={colormodesettle} />
-                        <ToolBar itemData={itemData} colormodesettle={colormodesettle} nftId={nftId} />
-
-                        <div className="spacing"></div>
+                        <div className="nft-name">
+                            <ItemInfo itemData={itemData} colormodesettle={colormodesettle} />
+                            <ToolBar itemData={itemData} colormodesettle={colormodesettle} nftId={nftId} />
+                            <div className="spacing"></div>
+                        </div>
+                        
                         <DropdownSection expand={isPriceHistoryExpand} header={<> {colormodesettle.ColorMode ? <PriceHistoryLightIcon /> : <PriceHistoryDarkIcon />}<SectionTitle style={{marginLeft: '18px'}}>Price History</SectionTitle></>}>
                             <PriceHistory nftId={nftId} colormodesettle={colormodesettle} />
                         </DropdownSection>
