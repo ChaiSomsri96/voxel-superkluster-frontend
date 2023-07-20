@@ -9,6 +9,10 @@ export const Container = styled.div`
   background-color: ${props => props.theme.primBgColor};
   padding-top: 140px;
   padding-bottom: 100px;
+
+  @media (max-width:1023px) {
+    padding-bottom: 70px;
+  }  
 `;
 
 export const NFTName = styled.div`
@@ -76,7 +80,7 @@ export const DetailSection = styled.div`
 
 export const MoreColTitle = styled.div`
   font-size: 35px;
-  line-height: 35px;
+  line-height: 40px;
   font-weight: 800;
   color: ${props => props.theme.primaryColor};
 `;
@@ -166,6 +170,11 @@ export const TableDiv = styled.div`
   font-size: 17px;
   line-height: 17px;
   font-weight: 400;
+
+  /*
+  @media (max-width:1023px) {
+    padding-bottom: 70px;
+  } */
 `;
 
 export const OfferUserLink = styled(Link)`

@@ -141,6 +141,18 @@
             }
         }
 
+        .nft-name {
+            @media(max-width: 1023px) {
+                display: none;
+            }
+        }
+
+        .nft-name-mobile {
+            @media(min-width: 1024px) {
+                display: none;
+            }
+        }
+
         .owner-ship {
             display: flex;
             gap: 35px;
@@ -278,6 +290,10 @@
     
     .more-nft {
         margin-top: 100px;
+
+        @media (max-width:1023px) {
+            margin-top: 60px;
+        }
         
         .more-label {
             text-align: center;
@@ -372,6 +388,18 @@
             grid-template-columns: repeat(auto-fill, minmax(calc((100% - 20px) / 3), 1fr));
             grid-gap: 10px;
 
+            @media (max-width:1500px) {
+                grid-template-columns: repeat(auto-fill, minmax(calc((100% - 10px) / 2), 1fr));
+            }
+
+            @media (max-width:1023px) {
+                grid-template-columns: repeat(auto-fill, minmax(calc((100% - 20px) / 3), 1fr));
+            }
+
+            @media (max-width:575px) {
+                grid-template-columns: repeat(auto-fill, minmax(calc((100% - 10px) / 2), 1fr));
+            }
+
             padding-top: 20px;
             padding-bottom: 20px;
         }
@@ -432,6 +460,18 @@
 
         .ant-table-tbody > tr:last-child > td {
             border-bottom: none;
+        }
+    }
+
+    .offer-table {
+        .ant-table-container {
+            min-width: 500px;
+        }
+    }
+
+    .listing-table {
+        .ant-table-container {
+            min-width: 500px;
         }
     }
 
