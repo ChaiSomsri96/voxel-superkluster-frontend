@@ -1,0 +1,84 @@
+const getNftItems = async (pageNumber, pageSize, filterData, searchKey) => {
+
+        console.log("getNftItems:   =========>   ", filterData);
+
+        /*
+        let tmp =[];
+        if (filterData.search_val)
+        {
+        for(let i = 0 ; i < filterData.search_val.length ; i ++){
+            if(filterData.search_val[i]=='#') tmp.push('%23');
+            else tmp.push(filterData.search_val[i]) ;
+        }
+        }
+        let rlt ="" ;
+        for(let i = 0 ; i < tmp.length ; i ++) rlt += tmp[i] ; */
+        /* 
+        dispatch(actions.fetchNftDetail(pageNumber, pageSize, filterData, null, accessToken, header));
+        localStorage.setItem('isSearchKey' ,'0') ;
+        setLoading(true) ; */
+
+        setLoading(true);
+        try {
+            let result;
+            let url = `/api/assets/explorer_assets`;
+            
+            if(accessToken)
+                url = `/api/assets/explorer_user_assets`; 
+
+            let requestData = {
+                page: pageNumber,
+                per_page: pageSize,
+                search_key: searchKey !== "" && searchKey !== null ? searchKey : null
+            };
+
+            /* 
+            if(filterData) {
+                if(filterData.tab) {
+                    url = `/api/supply-assets/user-profile-data`;
+                    requestData[filterData['tab']['key']] = filterData['tab']['value'];
+                }
+                else {
+                    requestData = {
+                        sale_type: filterData.sale_type ? filterData.sale_type : null,
+                        collection: filterData.collection && filterData.collection.length > 0? filterData.collection : null,
+                        chainUrl: filterData.chain_url ? filterData.chain_url : null,
+                        category: filterData.category ? filterData.category : "",
+                        min_price: filterData.min_price ? filterData.min_price : null,
+                        max_price: filterData.max_price ? filterData.max_price : null,
+                        order_type: filterData.order_type ? filterData.order_type : null,
+                        currency_type: filterData.price_type ? filterData.price_type : null,
+                        ...requestData
+                    };
+                }
+            } */
+
+            // if(filterData && filterData.tab) {
+            //    result = await Axios.post(url, requestData);
+            // }
+            // else {
+                if(!accessToken) result = await Axios.post(url, requestData);
+                else result = await Axios.post(url, requestData, {headers:header});
+            // }
+
+            if(result.data.data) {
+                setTempArr(result.data.data);
+            }
+
+            if (result.data.meta) {
+                setTotalNum(result.data.meta.total)
+                setItemLoading(false);
+            }
+
+            setLoading(false);
+
+            /*
+            const timer = setTimeout(() => {
+                setLoading(false)
+            }, 3000);
+            return () => clearTimeout(timer); */
+
+        } catch (err) {
+            console.error("get NftData api error: ", err);
+        }
+    }
