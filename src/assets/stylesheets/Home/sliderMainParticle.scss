@@ -1,0 +1,11 @@
+.bannerstyle{
+    max-width: 100% ;
+    margin: 50px 0px ;
+}
+
+@media only screen and  (max-height: 500px) {
+    .bannerstyle{
+        max-width: 100%  !important;
+        
+    } 
+}

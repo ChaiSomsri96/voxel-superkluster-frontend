@@ -1,0 +1,218 @@
+$color: #f60cfe;
+$white: #fff;
+$color_more: #403f83;
+$black_soft: #333;
+
+.navbar {
+    height: 100px;
+
+    padding: 0px 0px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid hsla(0,0%,100%,0);
+    z-index: 999;
+    transition: all .6s ease;
+}
+
+.sticky {
+  background: rgba(33, 36, 40, 0.8);
+  transition: all 0.6s ease;
+  backdrop-filter: blur(2px);
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+
+    .search {
+        margin-left: 50px;
+    }
+    .quick-search {
+        border-radius: 6px;
+        width: 500px;
+        height: 51px;
+        border: none;
+        font-size: 15px;
+        font-weight: 500;
+        outline: none;
+        padding: 0px 15px;
+    }
+
+    //menu
+    .breakpoint__xl-only {
+        width: max-content;
+        margin-left: auto;
+    }
+    
+    .nav-link-style {
+        align-items: center;
+        font-weight: bold;
+        padding: 15px;
+    }
+    .nav-menu-icon-style {
+        margin: 0px 5px 3px 0px; 
+        font-size: 16px;    
+    }
+    .nav-link-style {
+        align-items: center;
+        font-weight: bold;
+        padding: 15px;
+    }
+
+    .navbar-item {
+        position: relative;
+        display: inline-block;
+        padding: 0px 0px 0px 30px;
+        height: max-content;
+    
+        .lines {
+          position: absolute;
+          top: 22px;
+          display: block;
+          width: 0;
+          border-bottom: 2px solid $color;
+          transition: .7s;
+        }
+
+        .menuRef {
+          &:hover {
+            .lines {
+              width: 100%;
+              transition: .7s;
+            }
+          }
+        }
+    }
+
+    .btn {
+        color: #fff;
+        border-radius: 0;
+        transition-delay: 0s;
+        z-index: 0;
+
+        span {
+            color: $white;
+            position: relative;
+            z-index: 1;
+        }
+
+        &::before {
+            opacity: 0;
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+        
+        &:hover::before {
+            opacity: 1;
+            transition: all 0.3s ease;
+        }
+        
+        &:hover {
+            .shine {
+                -webkit-animation: sheen .6s alternate;
+                animation: sheen .6s alternate;
+            }
+        }
+    }
+
+    .dropdown-custom.btn {
+        font-size: 17px;
+        border: 0px;
+        position: relative;
+        top: -1px;
+        overflow: unset !important;
+        letter-spacing: normal;
+        font-weight: 500;
+        padding: 0px;
+        background: none !important;
+      
+        &::before {
+          content: '';
+          position: absolute;
+          top: -10px;
+          width: max-content;
+          height: auto;
+          padding: 30px 40px;
+          background: 0;
+        }
+      
+        &::after {
+          margin-left: 5px !important;
+        }
+    }
+
+    .connect-wallet {
+      margin-left: 40px;
+    }
+
+    .header-notification-icon {
+      margin-left: 30px;
+    }
+
+    .header-shopping-cart {
+      margin-left: 20px;
+
+      .badge {
+        position: absolute;
+        top: -3px; 
+        right: -3px;
+        border-radius: 50%;
+        background-color: #f60cfe; 
+        width: 22px;
+        height: 22px;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+      }
+
+      .cart-num {
+        color: white;
+        font-size: 12px; 
+        line-height: 12px;
+        font-weight: 400;
+      }
+    }
+}
+
+.item-dropdown {
+    width: max-content;
+    position: absolute;
+    border-radius: 5px;
+    overflow: hidden;
+    inset: 50px auto auto 0;
+    padding: 0 0;
+    animation: smoothDrop .2s ease;
+    -webkit-animation: smoothDrop .2s ease;
+    box-shadow: 2px 2px 30px 0px rgba(20, 20, 20, 0.1);
+    z-index: 1;
+  
+    .dropdown {
+      position: relative;
+      text-align: center;
+  
+      a {
+        text-transform: none;
+        font-weight: 500;
+        letter-spacing: normal;
+        display: block;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 12px 20px 12px 20px;
+        min-width: 210px;
+        width: 100%;
+        text-align: left;
+  
+        &:hover {
+          color: $white !important;
+          background: $color;
+        }
+  
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+    }
+}
