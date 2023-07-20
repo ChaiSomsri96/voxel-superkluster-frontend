@@ -1,0 +1,25 @@
+.top-filter-bar {
+    display: flex;
+    gap: 20px;
+
+    .icon-btn-radius {
+        border-radius: 6px;
+    }
+
+    .nft-view {
+        display: flex;
+
+        .detail-view {
+            border-radius: 6px 0px 0px 6px;
+        }
+
+        .tile-view {
+            border-radius: 0px 6px 6px 0px;
+        }
+
+        .grid-icon {
+            width: 20px;
+            height: 20px;
+        }
+    }
+}

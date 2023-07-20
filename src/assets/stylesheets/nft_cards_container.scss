@@ -1,0 +1,14 @@
+.nft-cards-container {
+    flex-grow: 1;
+
+    .cards-component {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(calc((100% - 75px) / 4), 1fr));
+        grid-gap: 25px;
+    }
+
+    .pagination-bar {
+        margin-top: 25px;
+        text-align: center;
+    }
+}

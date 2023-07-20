@@ -1,0 +1,16 @@
+.author-item {
+    .top-seller-avatar {
+        border-radius: 50%;
+        object-position: center top;
+        object-fit: cover;
+    
+        width: 60px;
+        height: 60px;
+    }
+
+    .verify-icon {
+        right: 0px;
+        bottom: 0px;
+        position: absolute;
+    }
+}

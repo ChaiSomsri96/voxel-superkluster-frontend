@@ -1,0 +1,29 @@
+.local-button-btn {
+    background: #f60cfe;
+    color: #fff;
+    border-radius: 6px;
+    outline: 0;
+    text-decoration: none;
+    
+    font-size: 16px;
+
+    box-shadow: 2px 2px 20px 0px rgba(131, 100, 226, 0);
+    transition: all 0.3s ease;
+    border: none;
+
+    padding: 0px 30px;
+
+    height: 51px;
+
+    &:hover {
+        box-shadow: 2px 2px 20px 0px rgba(131, 100, 226, 0.5);
+        transition: all 0.3s ease;
+    }
+
+    &:disabled {
+        background-color: rgb(216 212 212) !important;
+        box-shadow: none !important;
+        transition: none !important;
+        cursor: default !important;
+    }
+}

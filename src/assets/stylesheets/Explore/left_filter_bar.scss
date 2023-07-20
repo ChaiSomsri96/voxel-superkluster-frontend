@@ -1,0 +1,50 @@
+.left-filter-section {
+
+    height: calc(100vh - 100px - 40px); /* Adjust the value based on your top menu height */
+    overflow-y: auto;
+    position: sticky;
+    top: 120px;
+
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    .overflow-content {
+        overflow-y: auto;
+        height: 100%;
+    }
+
+    .rotate-up {
+        transform: rotate(180deg);
+        transition: transform 0.3s ease-in-out;
+    }
+      
+    .rotate-down {
+        transform: rotate(360deg);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .collapse-line {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    .checkbox-section {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding-top: 20px;
+    }
+
+    .apply-button {
+        width: 100%;
+    }
+
+    .apply-button:disabled {
+        background-color: rgb(216 212 212) !important;
+        box-shadow: none !important;
+        transition: none !important;
+        cursor: default !important;
+    }
+}

@@ -1,0 +1,63 @@
+.edit-profile-page {
+    .banner-line {
+        position: relative;
+        margin-bottom: 105px;
+    }
+
+    .avatar-line {
+        position: absolute;
+        bottom: -75px;
+        left: calc(50% - 75px);
+    }
+
+    .edit-form-item {
+        margin-top: 30px;
+    }
+
+    .trigger-section {
+        margin-top: 50px;
+    }
+
+    .spacing {
+        margin-bottom: 12px;
+    }
+
+    .edit-profile-button {
+        height: 51px;
+        width: 190px;
+    }
+
+    .edit-btn-style {
+        padding: 8px 40px;
+        color: white;
+        background-color: #f60cfe;
+        border: none;
+        outline: 0;
+        border-radius: 6px;
+        font-size: 16px;
+        box-shadow: 2px 2px 20px 0px rgba(131, 100, 226, 0);
+        transition: all 0.3s ease;
+        &:hover {
+            box-shadow: 2px 2px 20px 0px rgba(131, 100, 226, 0.5);
+            transition: all 0.3s ease;
+        }
+    }
+
+    .editProfileBtn:disabled {
+        background-color: rgb(216 212 212) !important;
+        box-shadow: none !important;
+        transition: none !important;
+        cursor: default !important;
+    }
+
+    .select-file {
+            border: 1px solid #222527;
+            border-radius: 6px;
+    }
+
+    .require-error {
+        font-size: 14px;
+        font-weight: 500;
+        margin-top: 5px;
+    }
+}
