@@ -106,7 +106,7 @@ const History = ({nftId}) => {
                     }
                     scrollableTarget="scrollableDiv"
                 >   
-                    <div style={{display: 'flex', flexDirection: 'column', gap: '30px', paddingTop: '15px', paddingBottom: '15px'}}>
+                    <div style={{display: 'flex', flexDirection: 'column', gap: '30px', paddingTop: '15px', paddingBottom: '15px', minWidth: '470px'}}>
                         {
                             historyData.map((item, index) => (
                                 <div key={index} style={{display: 'flex', alignItems: 'center'}}>

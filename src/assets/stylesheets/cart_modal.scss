@@ -1,7 +1,22 @@
 .cart-checkout {
+    margin: 0px auto;
+
+    @media (min-width: 500px) {
+        width: 400px !important;    
+        position: fixed;
+        top: 20px !important;
+        right: 20px;
+    }
+
+    @media (max-width: 499px) {
+        width: calc(100% - 40px) !important;    
+        position: fixed;
+        top: 20px !important;
+        right: 20px;
+    }
+
     .ant-modal-content {
         border-radius: 20px;
-        width: 400px;
         height: calc(100vh - 40px);
 
         .ant-modal-close {

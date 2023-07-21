@@ -11,7 +11,7 @@ import { useNavigate } from "@reach/router";
 import { usdPriceItemDetailPage, formatUSDPrice, formatSaleEndDate, checkBeforeOffer } from "./../../utils";
 import { Axios } from './../../core/axios';
 import Swal from 'sweetalert2' ;
-import { Spin, DatePicker, Checkbox } from "antd";
+import { Spin, DatePicker, Checkbox, Modal } from "antd";
 import Switch from "react-switch";
 import { LoadingOutlined } from '@ant-design/icons';
 import { FaDollarSign } from "react-icons/fa" ;
@@ -24,6 +24,8 @@ import { useSelector, useDispatch } from "react-redux";
 import * as actions from "./../../store/actions/thunks";
 import * as selectors from "./../../store/selectors";
 import ethIcon from "./../../assets/icons/ethIcon.png";
+
+import MakeOfferModal from "./modals/MakeOfferModal";
 
 const ToolBar = ({colormodesettle, itemData, nftId}) => {
     const dispatch = useDispatch();
@@ -78,6 +80,9 @@ const ToolBar = ({colormodesettle, itemData, nftId}) => {
     const [isAgreeWithTerms, setAgreeWithTerms] = useState(false);
     const [ethOption, setEthOption] = useState(false);
     const [isAddBtnVisible, setAddBtnVisible] = useState(true);
+
+    //popup
+    const [makeOfferOpen, setMakeOfferOpen] = useState(false);
 
     const handleEthOption = async () => {
         if(ethOption == true) setEthOption(false);
@@ -645,6 +650,12 @@ const ToolBar = ({colormodesettle, itemData, nftId}) => {
             navigate(`/wallet`);
             return;
         }
+
+        setMakeOfferOpen(true);
+    }
+
+    const handleMakeOfferCancel = () => {
+        setMakeOfferOpen(false);
     }
 
     const addCart = async () => {
@@ -851,24 +862,7 @@ const ToolBar = ({colormodesettle, itemData, nftId}) => {
                                 </button>
                             }
                         
-                            {
-                                account && accessToken ?
-                                <MakeOfferBtn 
-                                    className={`button-style button-width offer-button ${itemData.on_sale && itemData.sale_type === 1 ? 'button-make-offer-width' : ''}`}
-                                    data-bs-toggle="modal" 
-                                    data-bs-target="#placeBid"
-                                >
-                                    <div className="flex-align-center-row-center">
-                                        {
-                                        colormodesettle.ColorMode ?
-                                        <OfferButtonLightIcon />
-                                        :
-                                        <OfferButtonDarkIcon />
-                                        }
-                                        <div style={{marginLeft: '15px'}}>Make Offer</div>
-                                    </div>
-                                </MakeOfferBtn>
-                                :
+                           
                                 <MakeOfferBtn 
                                     className={`button-style button-width offer-button ${itemData.on_sale && itemData.sale_type === 1 ? 'button-make-offer-width' : ''}`}  
                                     onClick={() => makeOffer()} 
@@ -883,8 +877,7 @@ const ToolBar = ({colormodesettle, itemData, nftId}) => {
                                         <div style={{marginLeft: '15px'}}>Make Offer</div>
                                     </div>
                                 </MakeOfferBtn>
-                            }
-                        
+                           
                         
                         {
                             itemData.on_sale && itemData.sale_type === 1 ?
@@ -910,6 +903,8 @@ const ToolBar = ({colormodesettle, itemData, nftId}) => {
             }
             
         </DetailSection>
+
+        <MakeOfferModal cartPopupOpen={makeOfferOpen} handleCancel={handleMakeOfferCancel} />
 
         <div className="modal fade" id="cancelListing" tabIndex="-1" aria-labelledby="cancelListingLabel" aria-hidden="true">
           <div className="modal-dialog">
@@ -1020,97 +1015,6 @@ const ToolBar = ({colormodesettle, itemData, nftId}) => {
                   </div>
               </div>
           </div>
-        </div>
-
-        <div className="modal fade" id="placeBid" tabIndex="-1" aria-labelledby="placeBidLabel" aria-hidden="true">
-            <div className="modal-dialog">
-                <div className="modal-content" style={{ borderColor: '#dee2e6', borderRadius: 15 }}>
-                    <div className="modal-header">
-                        <h4 className="modal-title mt-3 mb-3" id="listingLabel">
-                            { itemData.sale_type === 2 ? 'Place a bid' : 'Make offer'}
-                        </h4>
-                        <input type="button" id="modalClose" ref={bidModalClose} className={colormodesettle.ColorMode?"btn-close":"btn-close btn-close-white"} data-bs-dismiss="modal" aria-label="Close" style={{ marginRight: 20 }} />
-                    </div>
-
-                    <div className="modal-body">
-                        <Spin spinning={loadingState} indicator={antIcon} delay={500}>
-                            <div style={{ padding: '10px 0px 5px 0px'}}>
-                            {
-                                itemData.sale_type === 2 ?
-                                 <></>
-                                :
-                                <>
-                                    <PTag className="NorTxt" style={{margin:'10px', fontWeight:'bold'}}>{itemData.sale_type === 2 ? 'Bid Expiration' : 'Offer Expiration'} <span style={{color:"red"}}>*</span></PTag>
-                                    <DatePicker
-                                        format="YYYY-MM-DD HH:mm" 
-                                        showTime={{ format: 'HH:mm' }} 
-                                        onChange={onChangeExpiration}
-                                        onOk={onOKExpiration}
-                                        disabledDate={disabledDate}
-                                        disabledTime={disabledTime} 
-                                    /> 
-                                </>
-                            }
-                            </div>
-
-                            <div style={{ padding: '5px 0px 25px 0px'}}>
-                                <PTag 
-                                    className="NorTxt" 
-                                    style={{marginTop:'10px', marginLeft:'10px', marginBottom: '0px', fontWeight:'bold'}}
-                                >
-                                        {itemData.sale_type === 2 ? "Please enter your bid price" : "Please enter your offer price"}
-                                </PTag>
-                                <FlexDiv>
-                                    <div style={{ width: '45%', margin: '0px 0px 0px 5px' }}>
-                                        <FaDollarSign className='dollarSign'/> USD
-                                        <StyledInput 
-                                            placeholder="Amount" 
-                                            onChange={(e) => changeBidPriceUSD(e.target.value)} 
-                                            value={isBidPrice} 
-                                        />
-                                    </div>
-                                    <div style={{ width: '55%', margin: '0px 0px 0px 5px' }}>
-                                        <StyledTokenImg src={currencyLogo(itemData? itemData.chain_id : null)} />{currencyName(itemData? itemData.chain_id : null)}
-                                        <StyledInput 
-                                            placeholder="Amount" 
-                                            onChange={(e) => changeBidPriceVXL(e.target.value)} 
-                                            value={isBidPriceVXL} 
-                                        />
-                                    </div>
-                                </FlexDiv>
-
-                                {
-                                    !is721 &&
-                                    <FlexDiv>
-                                        <div style={{ width: '100%', margin: '0px 0px 0px 5px' }}>
-                                            {itemData ? itemData.supply_number - 0/*ownedSupplyNum*/ : 0} Available
-                                            <StyledInput placeholder="Quantity" onChange={(e) => setQuantityForOffer(e.target.value)} value={offerQuantity_show ?? ""} />
-                                        </div>
-                                    </FlexDiv>
-                                }
-                            </div>
-                        </Spin>
-
-                        <ModalBottomDiv>
-                            <ModalCancelBtn style={{marginBottom:'5px'}} data-bs-dismiss="modal">Never mind</ModalCancelBtn>
-                            {
-                                isShowBtnState == true ?
-                                <ModalBtn 
-                                    onClick={handleBidAction} 
-                                    disabled={isBidActiveBtn && expirationDate && isClickBid ? false : true}
-                                >
-                                        { itemData.sale_type === 2 ? 'Place a bid' : 'Make offer'}
-                                </ModalBtn>
-                                : 
-                                <ModalBtn 
-                                    onClick={()=>handleApproveAction(isBidPrice)} 
-                                    disabled={isBidActiveBtn && expirationDate ? false : true}
-                                >Approve</ModalBtn>
-                            }
-                        </ModalBottomDiv>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <div className="modal fade" id="buyModal" tabIndex="-1" aria-labelledby="buyModalLabel" aria-hidden="true">

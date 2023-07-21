@@ -1,0 +1,25 @@
+.make-offer {
+    .ant-modal-content {
+        border-radius: 6px;
+
+        .ant-modal-close {
+            top: 6px;
+            right: 4px;
+
+            .ant-modal-close-x {
+                font-size: 20px;   
+            }
+        }
+    }
+
+    .ant-modal-header {
+        border-radius: 20px 20px 0 0;
+        padding: 28px 20px;
+
+        .ant-modal-title {
+            font-size: 18px;
+            line-height: 18px;
+            font-weight: 800;
+        }
+    }
+}

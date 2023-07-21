@@ -170,11 +170,11 @@ export const TableDiv = styled.div`
   font-size: 17px;
   line-height: 17px;
   font-weight: 400;
-
-  /*
-  @media (max-width:1023px) {
-    padding-bottom: 70px;
-  } */
+  
+  @media (max-width:1140px) {
+    font-size: 15px;
+    line-height: 15px;
+  }
 `;
 
 export const OfferUserLink = styled(Link)`
@@ -182,6 +182,11 @@ export const OfferUserLink = styled(Link)`
   font-size: 17px;
   line-height: 17px;
   font-weight: 400;
+
+  @media (max-width:1140px) {
+    font-size: 15px;
+    line-height: 15px;
+  }
 `;
 
 export const TabPanelDiv = styled.div`
