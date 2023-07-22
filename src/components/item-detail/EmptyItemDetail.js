@@ -41,12 +41,163 @@ const EmptyItemDetail = ({colormodesettle}) => {
     return (
         <div className="item-detail-section">
             <div className="left-side-section">
+
+                <div className='nft-name-mobile'>
+                    <div style={{width: '100%'}}>  {/* need to change in mobile */}
+                        <SkeletonTheme color="#eee" highlightColor="#ccc" height="32px">
+                            <Skeleton count={1} />
+                        </SkeletonTheme>
+                    </div>
+                    <div className='spacing'></div>
+                </div>
                 <AssetShow>
                     <SkeletonTheme color="#eee" highlightColor="#ccc" height="100%">
                         <Skeleton count={1} />
                     </SkeletonTheme>
                 </AssetShow>
                 <div className="spacing"></div>
+
+                {/* add for mobile */}
+                <div className="nft-name-mobile">
+                    <>
+                        <div className='owner-ship-skeleton'>
+                            <div className="flex-align-center">
+                                <div style={{marginRight: '15px'}}>
+                                    <SkeletonTheme color="#eee" highlightColor="#ccc" width="50px" height="50px" borderRadius="50%">
+                                        <Skeleton count={1} />
+                                    </SkeletonTheme>
+                                </div>
+
+                                <div>
+                                    <SubText>Owner</SubText>
+                                    <div style={{marginTop: '10px'}}>
+                                        <SkeletonTheme color="#eee" highlightColor="#ccc" width="120px" height="16px">
+                                            <Skeleton count={1} />
+                                        </SkeletonTheme>
+                                    </div>
+                                </div>
+                            </div> 
+
+                            <div className="flex-align-center">
+                                <div style={{marginRight: '15px'}}>
+                                    <SkeletonTheme color="#eee" highlightColor="#ccc" width="50px" height="50px" borderRadius="50%">
+                                        <Skeleton count={1} />
+                                    </SkeletonTheme>
+                                </div>
+
+                                <div>
+                                    <SubText>Collection</SubText>
+                                    <div style={{marginTop: '10px'}}>
+                                        <SkeletonTheme color="#eee" highlightColor="#ccc" width="120px" height="16px">
+                                            <Skeleton count={1} />
+                                        </SkeletonTheme>
+                                    </div>
+                                </div>
+                            </div>    
+                        </div>
+                        <AttrDiv>
+                            <div className='flex-align-center'>
+                                {
+                                    colormodesettle.ColorMode ? 
+                                    <CategoryLightIcon />
+                                    :
+                                    <CategoryDarkIcon />
+                                }
+
+                                <AttrText className="attr-text">
+                                    <SkeletonTheme color="#eee" highlightColor="#ccc" width="40px">
+                                        <Skeleton count={1} />
+                                    </SkeletonTheme>
+                                </AttrText>
+                            </div>
+
+                            <div className='flex-align-center'>
+                                {
+                                    colormodesettle.ColorMode ?
+                                    <EyeLightIcon /> 
+                                    :
+                                    <EyeDarkIcon />
+                                }
+                                <AttrText className="attr-text">
+                                    <SkeletonTheme color="#eee" highlightColor="#ccc" width="40px">
+                                        <Skeleton count={1} />
+                                    </SkeletonTheme>
+                                </AttrText>
+                            </div>
+
+                            <div className='flex-align-center'>
+                                {
+                                    colormodesettle.ColorMode ?
+                                    <HeartLightIcon />
+                                    :
+                                    <HeartDarkIcon />
+                                }
+
+                                <AttrText className="attr-text">
+                                    <SkeletonTheme color="#eee" highlightColor="#ccc" width="40px">
+                                        <Skeleton count={1} />
+                                    </SkeletonTheme>
+                                </AttrText>
+                            </div>
+                        </AttrDiv>
+                    </>
+                    <DetailSection className="tool-bar">
+                        <TimeSpan>
+                            <SkeletonTheme color="#eee" highlightColor="#ccc" width="40%">
+                                <Skeleton count={1} />
+                            </SkeletonTheme>
+                        </TimeSpan>
+
+                        <div className='spacing'></div>
+                        
+                        <SubText>
+                            <SkeletonTheme color="#eee" highlightColor="#ccc" width="50px">
+                                <Skeleton count={1} />
+                            </SkeletonTheme>
+                        </SubText>
+
+                        <div className='spacing'></div>
+
+                        <div className='price'>
+                            <MainPrice>
+                                <SkeletonTheme color="#eee" highlightColor="#ccc" width="100px">
+                                    <Skeleton count={1} />
+                                </SkeletonTheme>
+                            </MainPrice>
+
+                            <SubText style={{marginLeft: '27px'}}>
+                                <SkeletonTheme color="#eee" highlightColor="#ccc" width="80px">
+                                    <Skeleton count={1} />
+                                </SkeletonTheme>
+                            </SubText>
+                        </div>
+
+                        <div className='spacing'></div>
+
+                        <div style={{display: 'flex', gap: '20px'}}>
+                            <div style={{flex: 1}}>
+                                <SkeletonTheme color="#eee" highlightColor="#ccc" height="62px" borderRadius="6px">
+                                    <Skeleton count={1} />
+                                </SkeletonTheme>
+                            </div>
+                            <div style={{flex: 1}}>
+                                <SkeletonTheme color="#eee" highlightColor="#ccc" height="62px" borderRadius="6px">
+                                    <Skeleton count={1} />
+                                </SkeletonTheme>
+                            </div>
+
+                            <div style={{width: '62px'}}>
+                                <SkeletonTheme color="#eee" highlightColor="#ccc" height="62px" borderRadius="6px">
+                                    <Skeleton count={1} />
+                                </SkeletonTheme>
+                            </div>
+                        </div>
+                    </DetailSection>
+
+                    <div className="spacing"></div>
+                </div>
+                {/* ---- */}
+
                 <div>
                     <TabPanelDiv className="tab-panel-div">
                         <button className='active'>Overview</button>
@@ -110,150 +261,152 @@ const EmptyItemDetail = ({colormodesettle}) => {
                 </div>
             </div>
             <div className="right-side-section">
-                <>
-                    <div style={{width: '40%'}}>
-                        <SkeletonTheme color="#eee" highlightColor="#ccc" height="32px">
-                            <Skeleton count={1} />
-                        </SkeletonTheme>
-                    </div>
-                    <div className='spacing'></div>
-                    <div className='owner-ship-skeleton'>
-                        <div className="flex-align-center">
-                            <div style={{marginRight: '15px'}}>
-                                <SkeletonTheme color="#eee" highlightColor="#ccc" width="50px" height="50px" borderRadius="50%">
-                                    <Skeleton count={1} />
-                                </SkeletonTheme>
-                            </div>
-
-                            <div>
-                                <SubText>Owner</SubText>
-                                <div style={{marginTop: '10px'}}>
-                                    <SkeletonTheme color="#eee" highlightColor="#ccc" width="120px" height="16px">
-                                        <Skeleton count={1} />
-                                    </SkeletonTheme>
-                                </div>
-                            </div>
-                        </div> 
-
-                        <div className="flex-align-center">
-                            <div style={{marginRight: '15px'}}>
-                                <SkeletonTheme color="#eee" highlightColor="#ccc" width="50px" height="50px" borderRadius="50%">
-                                    <Skeleton count={1} />
-                                </SkeletonTheme>
-                            </div>
-
-                            <div>
-                                <SubText>Collection</SubText>
-                                <div style={{marginTop: '10px'}}>
-                                    <SkeletonTheme color="#eee" highlightColor="#ccc" width="120px" height="16px">
-                                        <Skeleton count={1} />
-                                    </SkeletonTheme>
-                                </div>
-                            </div>
-                        </div>    
-                    </div>
-
-                    <AttrDiv>
-                        <div className='flex-align-center'>
-                            {
-                                colormodesettle.ColorMode ? 
-                                <CategoryLightIcon />
-                                :
-                                <CategoryDarkIcon />
-                            }
-
-                            <AttrText className="attr-text">
-                                <SkeletonTheme color="#eee" highlightColor="#ccc" width="40px">
-                                    <Skeleton count={1} />
-                                </SkeletonTheme>
-                            </AttrText>
-                        </div>
-
-                        <div className='flex-align-center'>
-                            {
-                                colormodesettle.ColorMode ?
-                                <EyeLightIcon /> 
-                                :
-                                <EyeDarkIcon />
-                            }
-                            <AttrText className="attr-text">
-                                <SkeletonTheme color="#eee" highlightColor="#ccc" width="40px">
-                                    <Skeleton count={1} />
-                                </SkeletonTheme>
-                            </AttrText>
-                        </div>
-
-                        <div className='flex-align-center'>
-                            {
-                                colormodesettle.ColorMode ?
-                                <HeartLightIcon />
-                                :
-                                <HeartDarkIcon />
-                            }
-
-                            <AttrText className="attr-text">
-                                <SkeletonTheme color="#eee" highlightColor="#ccc" width="40px">
-                                    <Skeleton count={1} />
-                                </SkeletonTheme>
-                            </AttrText>
-                        </div>
-                    </AttrDiv>
-                </>
-
-                <DetailSection className="tool-bar">
-                    <TimeSpan>
-                        <SkeletonTheme color="#eee" highlightColor="#ccc" width="40%">
-                            <Skeleton count={1} />
-                        </SkeletonTheme>
-                    </TimeSpan>
-
-                    <div className='spacing'></div>
-                    
-                    <SubText>
-                        <SkeletonTheme color="#eee" highlightColor="#ccc" width="50px">
-                            <Skeleton count={1} />
-                        </SkeletonTheme>
-                    </SubText>
-
-                    <div className='spacing'></div>
-
-                    <div className='price'>
-                        <MainPrice>
-                            <SkeletonTheme color="#eee" highlightColor="#ccc" width="100px">
+                <div className="nft-name">
+                    <>
+                        <div style={{width: '40%'}}>
+                            <SkeletonTheme color="#eee" highlightColor="#ccc" height="32px">
                                 <Skeleton count={1} />
                             </SkeletonTheme>
-                        </MainPrice>
+                        </div>
+                        <div className='spacing'></div>
+                        <div className='owner-ship-skeleton'>
+                            <div className="flex-align-center">
+                                <div style={{marginRight: '15px'}}>
+                                    <SkeletonTheme color="#eee" highlightColor="#ccc" width="50px" height="50px" borderRadius="50%">
+                                        <Skeleton count={1} />
+                                    </SkeletonTheme>
+                                </div>
 
-                        <SubText style={{marginLeft: '27px'}}>
-                            <SkeletonTheme color="#eee" highlightColor="#ccc" width="80px">
+                                <div>
+                                    <SubText>Owner</SubText>
+                                    <div style={{marginTop: '10px'}}>
+                                        <SkeletonTheme color="#eee" highlightColor="#ccc" width="120px" height="16px">
+                                            <Skeleton count={1} />
+                                        </SkeletonTheme>
+                                    </div>
+                                </div>
+                            </div> 
+
+                            <div className="flex-align-center">
+                                <div style={{marginRight: '15px'}}>
+                                    <SkeletonTheme color="#eee" highlightColor="#ccc" width="50px" height="50px" borderRadius="50%">
+                                        <Skeleton count={1} />
+                                    </SkeletonTheme>
+                                </div>
+
+                                <div>
+                                    <SubText>Collection</SubText>
+                                    <div style={{marginTop: '10px'}}>
+                                        <SkeletonTheme color="#eee" highlightColor="#ccc" width="120px" height="16px">
+                                            <Skeleton count={1} />
+                                        </SkeletonTheme>
+                                    </div>
+                                </div>
+                            </div>    
+                        </div>
+
+                        <AttrDiv>
+                            <div className='flex-align-center'>
+                                {
+                                    colormodesettle.ColorMode ? 
+                                    <CategoryLightIcon />
+                                    :
+                                    <CategoryDarkIcon />
+                                }
+
+                                <AttrText className="attr-text">
+                                    <SkeletonTheme color="#eee" highlightColor="#ccc" width="40px">
+                                        <Skeleton count={1} />
+                                    </SkeletonTheme>
+                                </AttrText>
+                            </div>
+
+                            <div className='flex-align-center'>
+                                {
+                                    colormodesettle.ColorMode ?
+                                    <EyeLightIcon /> 
+                                    :
+                                    <EyeDarkIcon />
+                                }
+                                <AttrText className="attr-text">
+                                    <SkeletonTheme color="#eee" highlightColor="#ccc" width="40px">
+                                        <Skeleton count={1} />
+                                    </SkeletonTheme>
+                                </AttrText>
+                            </div>
+
+                            <div className='flex-align-center'>
+                                {
+                                    colormodesettle.ColorMode ?
+                                    <HeartLightIcon />
+                                    :
+                                    <HeartDarkIcon />
+                                }
+
+                                <AttrText className="attr-text">
+                                    <SkeletonTheme color="#eee" highlightColor="#ccc" width="40px">
+                                        <Skeleton count={1} />
+                                    </SkeletonTheme>
+                                </AttrText>
+                            </div>
+                        </AttrDiv>
+                    </>
+
+                    <DetailSection className="tool-bar">
+                        <TimeSpan>
+                            <SkeletonTheme color="#eee" highlightColor="#ccc" width="40%">
+                                <Skeleton count={1} />
+                            </SkeletonTheme>
+                        </TimeSpan>
+
+                        <div className='spacing'></div>
+                        
+                        <SubText>
+                            <SkeletonTheme color="#eee" highlightColor="#ccc" width="50px">
                                 <Skeleton count={1} />
                             </SkeletonTheme>
                         </SubText>
-                    </div>
 
-                    <div className='spacing'></div>
+                        <div className='spacing'></div>
 
-                    <div style={{display: 'flex', gap: '20px'}}>
-                        <div style={{flex: 1}}>
-                            <SkeletonTheme color="#eee" highlightColor="#ccc" height="62px" borderRadius="6px">
-                                <Skeleton count={1} />
-                            </SkeletonTheme>
+                        <div className='price'>
+                            <MainPrice>
+                                <SkeletonTheme color="#eee" highlightColor="#ccc" width="100px">
+                                    <Skeleton count={1} />
+                                </SkeletonTheme>
+                            </MainPrice>
+
+                            <SubText style={{marginLeft: '27px'}}>
+                                <SkeletonTheme color="#eee" highlightColor="#ccc" width="80px">
+                                    <Skeleton count={1} />
+                                </SkeletonTheme>
+                            </SubText>
                         </div>
-                        <div style={{flex: 1}}>
-                            <SkeletonTheme color="#eee" highlightColor="#ccc" height="62px" borderRadius="6px">
-                                <Skeleton count={1} />
-                            </SkeletonTheme>
-                        </div>
 
-                        <div style={{width: '62px'}}>
-                            <SkeletonTheme color="#eee" highlightColor="#ccc" height="62px" borderRadius="6px">
-                                <Skeleton count={1} />
-                            </SkeletonTheme>
-                        </div>
-                    </div>
-                </DetailSection>
+                        <div className='spacing'></div>
 
-                <div className="spacing"></div>
+                        <div style={{display: 'flex', gap: '20px'}}>
+                            <div style={{flex: 1}}>
+                                <SkeletonTheme color="#eee" highlightColor="#ccc" height="62px" borderRadius="6px">
+                                    <Skeleton count={1} />
+                                </SkeletonTheme>
+                            </div>
+                            <div style={{flex: 1}}>
+                                <SkeletonTheme color="#eee" highlightColor="#ccc" height="62px" borderRadius="6px">
+                                    <Skeleton count={1} />
+                                </SkeletonTheme>
+                            </div>
+
+                            <div style={{width: '62px'}}>
+                                <SkeletonTheme color="#eee" highlightColor="#ccc" height="62px" borderRadius="6px">
+                                    <Skeleton count={1} />
+                                </SkeletonTheme>
+                            </div>
+                        </div>
+                    </DetailSection>
+
+                    <div className="spacing"></div>
+                </div>
 
                 <DropdownSection 
                     expand={true}

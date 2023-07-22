@@ -75,16 +75,13 @@ const ItemDetailPage = ({ nftId, colormodesettle }) => {
                     <div className="left-side-section">
                         <AssetShow itemData={itemData} colormodesettle={colormodesettle} />
                         <div className="spacing"></div>
-                        
-                        {
-                            /*
-                            <div className="nft-name-mobile">
-                                <ItemInfo itemData={itemData} colormodesettle={colormodesettle} />
-                                <ToolBar itemData={itemData} colormodesettle={colormodesettle} nftId={nftId} />
-                                <div className="spacing"></div>
-                            </div>
-                            */
-                        }
+    
+                        <div className="nft-name-mobile">
+                            <ItemInfo itemData={itemData} colormodesettle={colormodesettle} />
+                            <ToolBar itemData={itemData} colormodesettle={colormodesettle} nftId={nftId} />
+                            <div className="spacing"></div>
+                        </div>
+                   
                         <TabPanel itemData={itemData} />
                     </div>
 

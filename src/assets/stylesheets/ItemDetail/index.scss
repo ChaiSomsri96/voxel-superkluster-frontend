@@ -109,6 +109,14 @@
 
             width: 100%;
 
+            .skeleton-name {
+                width: 40%;
+
+                @media(max-width: 499px) {
+                    width: 100%;
+                }
+            }
+
         }
 
         .right-side-section {

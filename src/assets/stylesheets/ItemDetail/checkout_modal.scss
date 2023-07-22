@@ -1,0 +1,95 @@
+.checkout-modal {
+    .ant-modal-content {
+        border-radius: 6px;
+
+        .ant-modal-close {
+            top: 6px;
+            right: 4px;
+
+            .ant-modal-close-x {
+                font-size: 20px;   
+            }
+        }
+    }
+    
+    .ant-modal-header {
+        border-radius: 20px 20px 0 0;
+        padding: 28px 20px;
+
+        .ant-modal-title {
+            font-size: 18px;
+            line-height: 18px;
+            font-weight: 800;
+        }
+    }
+
+    .price-container {
+        display: flex; 
+        align-items: center; 
+        justify-content: space-between; 
+        padding: 20px;
+    }
+
+    .total-price {
+        display: flex; 
+        flex-direction: column; 
+        gap: 8px; 
+        align-items: flex-end;
+    }
+
+    .top-header {
+        display: flex;
+        justify-content: space-between;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .item-scroll {
+        padding: 0px 10px; 
+        margin-top: 15px;
+        margin-bottom: 15px;
+
+        .item-con {
+            display: flex;
+            align-items: center;
+
+            @media (max-width:499px) {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .item-name-set {
+                display: flex; 
+                flex-direction: column;
+                padding-left: 15px; 
+                gap: 8px;
+                
+                @media (max-width:499px) {
+                    padding-left: 0px; 
+                    padding-top: 15px;
+                }
+            }
+        }
+    }
+
+    .cart-item-img {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        &:hover {
+            border: #f60cfe 2px solid;
+        }
+
+        img {
+            border-radius: 50%;
+            object-position: center top;
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+            transition: all .3s;
+            &:hover {
+                transform: scale(0.9);
+            }
+        }
+    }
+}
