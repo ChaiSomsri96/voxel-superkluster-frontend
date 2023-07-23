@@ -1127,10 +1127,6 @@ a {
   }
 }
 
-.top-menu-icon {
-  display: none!important;
-}
-
 .ant-pagination {
   .ant-select {
     margin: 0px!important
@@ -1362,10 +1358,6 @@ a {
   
   
   @media only screen and (max-width: 1199px) {
-    .top-menu-icon {
-      display: block!important;
-    }
-
     .m-2-hor {
       padding: 0px 2%;
     }
@@ -1488,10 +1480,6 @@ a {
 
   @media only screen and (max-width: 800px) {
     &.navbar {
-      .search {
-        display: none;
-      }
-
       .search_mobile {
         display:inline-block;
         padding: 4px 11px;

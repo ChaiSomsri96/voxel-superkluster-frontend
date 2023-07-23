@@ -1,17 +1,39 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "@reach/router";
+import styled from "styled-components";
 import ThemeToggleBtn from "./ThemeToggleBtn";
 import { Drawer, Button, Menu, Space } from "antd";
 import { MenuOutlined, HomeOutlined, CompassOutlined, DiffOutlined, DeploymentUnitOutlined } from '@ant-design/icons';
+import "./../assets/stylesheets/Header/nav_drawer.scss";
+import { navigate } from "@reach/router";
+import { FaShoppingCart, FaBell } from "react-icons/fa";
+import { useSelector} from 'react-redux';
+import * as selectors from '../store/selectors';
 
-function NavDrawer({funcs , colormodesettle}) {
+const HamburgerButton = styled.div`
+  color: ${props => props.theme.primaryColor};
+  cursor: pointer;
+`;
+
+const MenuIconDiv = styled.div`
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: ${({ theme }) => theme.notificationBgc};
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+`;
+
+function NavDrawer({funcs, colormodesettle}) {
 
   const { SubMenu } = Menu;
-
   const account = localStorage.getItem('account');
+  let cartInfo = useSelector(selectors.cartInfoState).data;
 
   const [visible, setVisible] = useState(false) ;
-
 
   useEffect(()=>{
   },[]) ;
@@ -24,27 +46,20 @@ function NavDrawer({funcs , colormodesettle}) {
     setVisible(false);
   };
 
-  const menuIconStyle = {
-    background: 'transparent', 
-    borderColor: 'transparent', 
-    marginLeft: '5px',
-    boxShadow: 'none',
-    color: '#f70dff'
-  }
-
-  const primaryBtnStyle = {
-    width: '90%',
-    padding: '10px 40px', 
-    color: 'white', 
-    backgroundColor: '#f70dff', 
-    border: '1px solid #e5e8eb', 
-    borderRadius: '5px',
-    margin: '30px 13px'
+  const signIn = () => {
+    setVisible(false);
+    navigate('/wallet');
   }
 
   return (
     <>
-      <Button type="primary" className="top-menu-icon" icon={<MenuOutlined />} onClick={showDrawer} style={menuIconStyle} />
+      <HamburgerButton
+      className="top-menu-icon"  
+      onClick={showDrawer}
+      >
+        <MenuOutlined style={{fontSize: '22px'}} />
+      </HamburgerButton>
+
       <Drawer
         placement="right"
         width={250}
@@ -63,47 +78,62 @@ function NavDrawer({funcs , colormodesettle}) {
       >
         <Menu
         style={{ width: 250 }}
-        defaultSelectedKeys={['1']}
-        defaultOpenKeys={['explore', 'stats']}
         mode="inline"
         >
-          <Menu.Item key="1" icon={<HomeOutlined />}>
+          <Menu.Item key="home">
             <Link to="/home" onClick={onClose}  >
               Home
             </Link>
           </Menu.Item>
-          <SubMenu key="explore" icon={<CompassOutlined />} title="Explore">
-            <Menu.Item key="2">
+
+          <SubMenu key="explore" title="Explore">
+            <Menu.Item key="all_nfts">
               <Link to="/explore" onClick={onClose} >All NFTs</Link>
             </Menu.Item>
-            <Menu.Item key="3">
+            <Menu.Item key="collections">
               <Link to="/explore-collections" onClick={onClose} >Collections</Link>
             </Menu.Item>
           </SubMenu>
-          
-          <Menu.Item key="4" icon={<DiffOutlined />}>
-            <Link to="/ranking" onClick={onClose} >Ranking</Link>
-          </Menu.Item>
         
           {
-            account && 
-              <Menu.Item key="7"  icon={<DeploymentUnitOutlined />}>
-                <Link to="/create" onClick={onClose}  >
-                  Create
-                </Link>
+            account &&
+            <SubMenu key="create" title="Create">
+              <Menu.Item key="create_nft">
+                <Link to="/create" onClick={onClose} >New NFT</Link>
               </Menu.Item>
-          }
-          <Menu.Item key="10"  className="mobileToggle" icon={"Turn  Mode"}>
-            <ThemeToggleBtn funcs={funcs} colormodesettle={colormodesettle}/>
-          </Menu.Item>
+              <Menu.Item key="create_collection">
+                <Link to="/create-collections" onClick={onClose} >New Collection</Link>
+              </Menu.Item>
+            </SubMenu>   
+          }        
         </Menu>
         
         {
           !account &&  
-          <div>
-            <Link to="/wallet" onClick={onClose}>
-              <button style={primaryBtnStyle}>Connect Wallet</button>
-            </Link>
+          <div className="signin-button-container">
+            <button className="drawer-signin signin-button-btn" onClick={() => signIn()}>
+              Sign in
+            </button>
+          </div>
+        }
+
+        { account &&
+          <div className="nav-drawer-icons">
+              <MenuIconDiv className="fa-bell-icon">
+                  <FaBell size={16} />
+              </MenuIconDiv>
+
+              <MenuIconDiv className="header-shopping-cart">
+                  {
+                    cartInfo && cartInfo.data && cartInfo.data.length > 0 ?
+                    <div className="badge">
+                      <span className="cart-num">{cartInfo.data.length}</span>
+                    </div>
+                    :
+                    null
+                  }
+                  <FaShoppingCart size={16} />
+              </MenuIconDiv>
           </div>
         }
       </Drawer>
