@@ -228,7 +228,7 @@ const GlobalStyles = createGlobalStyle`
     border-right : ${({ theme }) => theme.mobileBorderColor};
   }
   .ant-drawer-header {
-    border-bottom : ${({ theme }) => theme.modalHeaderBorderColor};
+    border-bottom : ${({ theme }) => theme.mobileBorderColor};
   }
   .imageUploader {
     background : ${({ theme }) => theme.uploadFileSysColor} !important ;

@@ -43,8 +43,12 @@
 }
 
 .nav-drawer-icons {
-    margin-top: 20px;
 
+    @media (min-width: 900px) {
+        display: none;
+    }
+
+    margin-top: 20px;
     display: flex;
     justify-content: center;
 
