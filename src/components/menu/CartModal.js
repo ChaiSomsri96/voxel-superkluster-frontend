@@ -334,13 +334,6 @@ const CartModal = ({cartPopupOpen, handleCancel, colormodesettle}) => {
             footer={null}
             centered={true}
             title="My Cart"
-            width="400"
-
-            style={{
-                position: 'fixed',
-                top: 20,
-                right: 20
-            }}
         >
                 <div className='top-header'>
                     <TopHeader>{cartInfo && cartInfo.data ? cartInfo.data.length : 0} items</TopHeader>

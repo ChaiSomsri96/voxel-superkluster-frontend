@@ -1,6 +1,6 @@
 import React, { memo, useState , useEffect} from 'react' ;
 import { Axios } from "./../core/axios";
-import { formatMarketplaceNumber, formatCreatedDate, directLink } from "./../utils";
+import { formatMarketplaceNumber, formatCreatedDate, directLink, usdPriceItemDetailPage } from "./../utils";
 import collectionDefaultBanner from "./../assets/image/collection_default_banner.jpg";
 import "./../assets/stylesheets/CollectionDetail/index.scss";
 import { ReactComponent as VerifyIcon } from "./../assets/svg/small_verify.svg";
@@ -129,12 +129,12 @@ const CollectionDetailPage = function ({ colormodesettle }) {
               </div>
 
               <div style={{marginLeft: '40px'}}>
-                <CollectionFactor>{isDetailData ? isDetailData.floor_price : 0} USD</CollectionFactor>
+                <CollectionFactor>{isDetailData ? usdPriceItemDetailPage(isDetailData.floor_price) : "0.00"} USD</CollectionFactor>
                 <CollectionPre style={{marginTop: '16px'}}>floor price</CollectionPre>
               </div>
 
               <div style={{marginLeft: '40px'}}>
-                <CollectionFactor>{isDetailData ? isDetailData.usd_volume_traded : 0} USD</CollectionFactor>
+                <CollectionFactor>{isDetailData ? usdPriceItemDetailPage(isDetailData.usd_volume_traded) : "0.00"} USD</CollectionFactor>
                 <CollectionPre style={{marginTop: '16px'}}>volume traded</CollectionPre>
               </div>
             </div>

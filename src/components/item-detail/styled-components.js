@@ -170,11 +170,11 @@ export const TableDiv = styled.div`
   font-size: 17px;
   line-height: 17px;
   font-weight: 400;
-
-  /*
-  @media (max-width:1023px) {
-    padding-bottom: 70px;
-  } */
+  
+  @media (max-width:1140px) {
+    font-size: 15px;
+    line-height: 15px;
+  }
 `;
 
 export const OfferUserLink = styled(Link)`
@@ -182,6 +182,11 @@ export const OfferUserLink = styled(Link)`
   font-size: 17px;
   line-height: 17px;
   font-weight: 400;
+
+  @media (max-width:1140px) {
+    font-size: 15px;
+    line-height: 15px;
+  }
 `;
 
 export const TabPanelDiv = styled.div`
@@ -199,46 +204,35 @@ export const ModalBottomDiv = styled.div`
 export const ModalBtn = styled(Button)`
   height: 40px;
   color: white;
-  background: #f70dff;
+  background: #f60cfe;
   padding: 0px 25px;
-  border-color: #f70dff;
-  border-radius: 10px;
+  border-color: #f60cfe;
+  border-radius: 6px;
   font-weight: bold;
   margin: 0px 10px;
-
+  transition: all 0.3s ease;
   &:hover {
     color: white;
-    background: #f70dff;
-    border-color: #f70dff;
-  }
-
-  &:focus {
-    color: white;
-    background: #f70dff;
-    border-color: #f70dff;
+    background: #f60cfe;
+    box-shadow: 2px 2px 20px 0px rgba(131, 100, 226, 0.5);
+    transition: all 0.3s ease;
   }
 `;
 
 export const ModalCancelBtn = styled(Button)`
   height: 40px;
-  color: #f70dff;
+  color: #f60cfe;
   background: white;
   padding: 0px 25px;
-  border-color: #f70dff;
-  border-radius: 10px;
+  border: 1px solid #f60cfe !important;
+  border-radius: 6px;
   font-weight: bold;
-  margin: 0px 10px 5px 10px;
-
+  margin: 0px 10px;
+  transition: all 0.3s ease;
   &:hover {
-    color: #f70dff;
-    background: white;
-    border-color: #f70dff;
-  }
-
-  &:focus {
-    color: #f70dff;
-    background: white;
-    border-color: #f70dff;
+    color: #f60cfe;
+    box-shadow: 2px 2px 20px 0px rgba(131, 100, 226, 0.5);
+    transition: all 0.3s ease;
   }
 `; 
 
@@ -322,4 +316,20 @@ export const ModalTotalBar = styled.div`
   justify-content: space-between;
   padding: 10px 5px 10px 15px;
   align-items: center;
+`;
+
+export const ModalLabel = styled.div`
+  font-size: 15px;
+  line-height: 15px;
+  font-weight: 600;
+  color: ${props => props.theme.primaryColor};
+
+  margin-bottom: 10px;
+`;
+
+export const NoticeMsg = styled.div`
+    color: ${props => props.theme.filterButtonColor};
+    font-size: 13px;
+    line-height: 18px;
+    font-weight: 400;
 `;

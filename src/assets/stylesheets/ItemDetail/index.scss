@@ -109,6 +109,14 @@
 
             width: 100%;
 
+            .skeleton-name {
+                width: 60%;
+
+                @media(max-width: 499px) {
+                    width: 100%;
+                }
+            }
+
         }
 
         .right-side-section {
@@ -465,7 +473,7 @@
 
     .offer-table {
         .ant-table-container {
-            min-width: 500px;
+            min-width: 575px;
         }
     }
 

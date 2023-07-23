@@ -612,7 +612,25 @@ const GlobalStyles = createGlobalStyle`
 
   .cart-checkout .ant-modal-header .ant-modal-title {
     color: ${props => props.theme.primaryColor};
-  }  
+  }
+
+  .tool-bar-modal .ant-modal-content {
+    background-color: ${props => props.theme.modalBkColor};
+  }
+
+  .tool-bar-modal .ant-modal-content .ant-modal-close {
+    color: ${props => props.theme.primaryColor};
+  }
+
+  .tool-bar-modal .ant-modal-header {
+    background-color: ${props => props.theme.modalBkColor};
+
+    border-bottom: 1px solid ${props => props.theme.modalHeaderBorderColor};
+  }
+
+  .tool-bar-modal .ant-modal-header .ant-modal-title {
+    color: ${props => props.theme.primaryColor};
+  }
 `;
 
 
