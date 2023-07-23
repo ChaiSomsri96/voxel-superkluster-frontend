@@ -1,4 +1,4 @@
-import React, { memo, useState, useEffect, useRef } from 'react';
+import React, { memo, useState, useEffect } from 'react';
 import { TimeSpan, DetailSection, SubText, MainPrice, MakeOfferBtn, PTag, 
     FaEditIcon, ImPriceTagsIcon, RemoveIcon } from "./styled-components";
 import { ReactComponent as OfferButtonDarkIcon } from "./../../assets/svg/item_detail/offer_button_icon_dark.svg";
@@ -6,16 +6,9 @@ import { ReactComponent as OfferButtonLightIcon } from "./../../assets/svg/item_
 import { ReactComponent as CartDarkIcon } from "./../../assets/svg/item_detail/cart_dark.svg";
 import { ReactComponent as CartLightIcon } from "./../../assets/svg/item_detail/cart_light.svg";
 import { useNavigate } from "@reach/router";
-import { usdPriceItemDetailPage, formatUSDPrice, formatSaleEndDate, checkBeforeOffer } from "./../../utils";
+import { usdPriceItemDetailPage, formatUSDPrice, formatSaleEndDate } from "./../../utils";
 import { Axios } from './../../core/axios';
-import Swal from 'sweetalert2' ;
-import { DatePicker } from "antd";
-import { LoadingOutlined } from '@ant-design/icons';
 import { currencyLogo } from "./../../store/utils";
-import moment from "moment";
-import { signMessage, getApprove, isApproved, getBuyAction } from "./../../core/nft/interact";
-import { useWeb3React } from "@web3-react/core";
-
 import { useSelector, useDispatch } from "react-redux";
 import * as actions from "./../../store/actions/thunks";
 import * as selectors from "./../../store/selectors";
@@ -28,12 +21,8 @@ import CheckoutModal from './modals/CheckoutModal';
 const ToolBar = ({colormodesettle, itemData, nftId}) => {
     const dispatch = useDispatch();
 
-    let offerData = useSelector(selectors.nftBidHistoryState).data;
     let cartInfo = useSelector(selectors.cartInfoState).data;
 
-    const closeBtnClick = useRef(null);
-
-    const { library } = useWeb3React();
     const navigate = useNavigate();
 
     const account = localStorage.getItem('account') ;
@@ -42,30 +31,7 @@ const ToolBar = ({colormodesettle, itemData, nftId}) => {
 
     const is721 = itemData.is_voxel ? itemData.is_721 : itemData.collection.is_721;
     const isOwner = !account ? false : itemData.owners.some(owner => owner.owner.public_address === account);
-    
-    const bidModalClose = useRef(null);
-    const buyModalClose = useRef(null);
 
-    const [offerQuantity, setOfferQuantity] = useState('');
-    const [offerQuantity_show, setOfferQuantity_show] = useState('');
-    
-    const [isShowBtnState, setShowBtnState] = useState(true);
-
-    const [isChangePrice, setChangePrice] = useState('');
-    const [isChangePriceUsd, setChangePriceUSD] = useState('');
-    const [isActiveBtn, setActiveBtn] = useState(false);
-    const [isSaleEndDate, setSaleEndDate] = useState('');
-    const [isAuctionEndDate, setAuctionEndDate] = useState('');
-    const [isSellPeriodState, setSellPeriodState] = useState(false);
-    const [isToDate, setToDate] = useState(null);
-    const [isBidPrice, setBidPrice] = useState('');
-    const [isBidPriceVXL, setBidPriceVXL] = useState('');
-    const [isBidActiveBtn, setBidActiveBtn] = useState(false);
-    const [isClickBid , setClickBid] = useState(true) ;
-    const [expirationDate, setExpirationDate] = useState();
-
-    const [isClickConfirm , setClickConfirm] = useState(false);
-    const [isAgreeWithTerms, setAgreeWithTerms] = useState(false);
     const [ethOption, setEthOption] = useState(false);
     const [isAddBtnVisible, setAddBtnVisible] = useState(true);
 
@@ -74,22 +40,6 @@ const ToolBar = ({colormodesettle, itemData, nftId}) => {
     const [cancelListingOpen, setCancelListingOpen] = useState(false);
     const [lowerPriceOpen, setLowerPriceOpen] = useState(false);
     const [checkoutOpen, setCheckoutOpen] = useState(false);
-
-    const handleEthOption = async () => {
-        if(ethOption == true) setEthOption(false);
-        else setEthOption(true);
-    }
-
-    useEffect(() => {
-        if(itemData.on_sale) {
-            setSaleEndDate(formatSaleEndDate(itemData.sale_end_date));
-            setToDate(itemData.sale_end_date);
-        }
-        else {
-            setSaleEndDate("");
-            setToDate(null);
-        }
-    }, [itemData.sale_end_date, itemData.on_sale]);
 
     useEffect(() => {
         if(cartInfo && cartInfo.data) {

@@ -43,7 +43,7 @@ const EmptyItemDetail = ({colormodesettle}) => {
             <div className="left-side-section">
 
                 <div className='nft-name-mobile'>
-                    <div style={{width: '100%'}}>  {/* need to change in mobile */}
+                    <div className='skeleton-name'>  {/* need to change in mobile */}
                         <SkeletonTheme color="#eee" highlightColor="#ccc" height="32px">
                             <Skeleton count={1} />
                         </SkeletonTheme>
@@ -174,13 +174,13 @@ const EmptyItemDetail = ({colormodesettle}) => {
 
                         <div className='spacing'></div>
 
-                        <div style={{display: 'flex', gap: '20px'}}>
-                            <div style={{flex: 1}}>
+                        <div className='button-container'>
+                            <div className='button-width'>
                                 <SkeletonTheme color="#eee" highlightColor="#ccc" height="62px" borderRadius="6px">
                                     <Skeleton count={1} />
                                 </SkeletonTheme>
                             </div>
-                            <div style={{flex: 1}}>
+                            <div className='button-width button-make-offer-width'>
                                 <SkeletonTheme color="#eee" highlightColor="#ccc" height="62px" borderRadius="6px">
                                     <Skeleton count={1} />
                                 </SkeletonTheme>
