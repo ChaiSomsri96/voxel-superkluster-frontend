@@ -124,6 +124,10 @@ const GlobalStyles = createGlobalStyle`
   .ant-drawer-close , .countdown-amount , .d-title  , .de_countdown , .ant-pagination-jump-prev .ant-pagination-item-container .ant-pagination-item-ellipsis, .ant-pagination-jump-next .ant-pagination-item-container .ant-pagination-item-ellipsis {
     color: ${({ theme }) => theme.text};
   }
+  .ant-drawer-close:hover {
+    color: ${({ theme }) => theme.text};
+  }
+
   .ant-alert-message , .notificationMsg , .ant-popover-inner-content , .ant-popover-title , .properites-fontSy , .progress-properties , .ant-input-status-error:not(.ant-input-disabled):not(.ant-input-borderless).ant-input, .ant-input-status-error:not(.ant-input-disabled):not(.ant-input-borderless).ant-input:hover , .container .superKluster_Slide .slick-arrow:before{
     color: ${({ theme }) => theme.text} !important;
   }
@@ -224,7 +228,7 @@ const GlobalStyles = createGlobalStyle`
     border-right : ${({ theme }) => theme.mobileBorderColor};
   }
   .ant-drawer-header {
-    border-bottom : ${({ theme }) => theme.mobileBorderColor};
+    border-bottom : ${({ theme }) => theme.modalHeaderBorderColor};
   }
   .imageUploader {
     background : ${({ theme }) => theme.uploadFileSysColor} !important ;
