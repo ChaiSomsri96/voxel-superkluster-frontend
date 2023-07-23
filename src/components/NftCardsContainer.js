@@ -17,8 +17,6 @@ const NoDataDiv = styled.div`
 `;
 
 const NftCardsContainer = ({ filterData }) => {
-    const account = localStorage.getItem('account');
-
     const accessToken = localStorage.getItem('accessToken');
     const header = { 'Authorization': `Bearer ${accessToken}` };
     const history = createBrowserHistory();
@@ -204,8 +202,8 @@ const NftCardsContainer = ({ filterData }) => {
                         defaultCurrent={1} 
                         current={pageNumber} 
                         total={totalNum} 
-                        defaultPageSize={24}
-                        pageSizeOptions={[12, 24, 48, 96]}
+                        defaultPageSize={60}
+                        pageSizeOptions={[60, 120]}
                         onChange={handlePageEvent} 
                         onShowSizeChange={onShowSizeChange} 
                         responsive={true}  />

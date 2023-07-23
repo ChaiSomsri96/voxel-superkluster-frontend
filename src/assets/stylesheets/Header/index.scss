@@ -28,8 +28,39 @@ $black_soft: #333;
     display: flex;
     align-items: center;
 
+    .superkluster-logo {
+      height: 49px;
+      @media (max-width: 1540px) {
+        height: 40px;
+      }
+
+      @media (max-width: 1320px) {
+        height: 35px;
+      }
+
+      @media (max-width: 599px) {
+        height: 50px;
+      }
+    }
+
+    .margin-auto {
+      @media (max-width: 1199px) {
+        margin: auto;
+      }
+    }
+
+    .search-trigger-btn {
+      @media (min-width: 760px) {
+        display: none;
+      }
+    }
+
     .search {
         margin-left: 50px;
+
+        @media (max-width: 759px) {
+          display: none;
+        }
     }
     .quick-search {
         border-radius: 6px;
@@ -40,6 +71,34 @@ $black_soft: #333;
         font-weight: 500;
         outline: none;
         padding: 0px 15px;
+
+        @media (max-width: 1540px) {
+          width: 400px;
+        }
+
+        @media (max-width: 1390px) {
+          width: 350px;
+        }
+
+        @media (max-width: 1320px) {
+          width: 300px;
+        }
+
+        @media (max-width: 1240px) {
+          width: 280px;
+        }
+
+        @media (max-width: 950px) {
+          width: 250px;
+        }
+    }
+
+    //hamburger
+    .top-menu-icon {
+      margin-left: 16px;
+      @media (min-width: 1200px) {
+        display: none;
+      }
     }
 
     //menu
@@ -147,10 +206,17 @@ $black_soft: #333;
 
     .connect-wallet {
       margin-left: 40px;
+
+      @media (max-width: 834px) {
+        display: none;
+      }
     }
 
     .header-notification-icon {
       margin-left: 30px;
+      @media (max-width: 899px) {
+        margin-left: 16px;
+      }
     }
 
     .header-shopping-cart {

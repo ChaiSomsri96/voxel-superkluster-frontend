@@ -17,9 +17,11 @@ import ThemeToggleBtn from "../ThemeToggleBtn";
 import CartModal from "./CartModal";
 import LocalButton from "../common/Button";
 import { MenuIconDiv, ProfileMenu, ProfileMenuStyle, ActionButton, ProfileMenuIcon } from "./styled-components";
+
 import defaultUser from "../../assets/image/default_user.png";
 import vxlCurrency from "../../assets/image/vxl_currency.png";
 import ethIcon from "../../assets/icons/ethIcon.png";
+
 import useMetaMask from "../wallet-connect/metamask";
 import { saveAccessToken, saveAuthorAccount } from "../../store/actions" ;
 import { useWeb3React } from "@web3-react/core";  
@@ -27,8 +29,6 @@ import { getBalance, claimRoyalties } from "../../core/nft/interact";
 import * as actions from "../../store/actions/thunks";
 import { Axios } from "../../core/axios";
 import Swal from 'sweetalert2' ;
-import NavDrawer from "./../NavDrawer";
-import { SearchOutlined } from '@ant-design/icons';
 
 setDefaultBreakpoints([{ xs: 0 }, { l: 1199 }, { xl: 1200 }]);
 
@@ -49,11 +49,6 @@ const NavMenuIcon = ({ isCurrent, ...props }) => (
     className={isCurrent ? "active" : "non-active"}
   />
 );
-
-const SearchInputTriggerButton = styled.div`
-  color: ${props => props.theme.primaryColor};
-  cursor: pointer;
-`;
 
 const QuickSearchInput = styled.input`
     color: ${props => props.theme.secondaryColor};
@@ -86,6 +81,7 @@ const Header = function ({ location , funcs  ,colormodesettle }) {
   const [avatarSrc, setAvatarSrc] = useState('');
   //menu setting
   const [openExploreMenu, setOpenExploreMenu] = useState(false);
+  const [openMenu2, setOpenMenu2] = useState(false); // stats
   const [openCreateMenu, setOpenCreateMenu] = useState(false);
 
   //theme setting
@@ -109,12 +105,6 @@ const Header = function ({ location , funcs  ,colormodesettle }) {
     position: 'inherit',
 
     marginLeft: '20px'
-  }
-
-  const menuIconStyle = {
-    background: 'transparent', 
-    borderColor: 'transparent',
-    boxShadow: 'none'
   }
 
   function useWindowSize() {
@@ -353,6 +343,17 @@ const Header = function ({ location , funcs  ,colormodesettle }) {
     closeCreateMenu();
   });
 
+  // Stats
+  const handleBtnClick2 = () => {
+    setOpenMenu2(!openMenu2);
+  };
+  const closeMenu2 = () => { // close stats menu
+    setOpenMenu2(false);
+  };
+  const ref2 = useOnclickOutside(() => {
+    closeMenu2();
+  });
+
   useEffect(() => {
     const getUserInfo = async (account) => {
       const balance = await getBalance(account, library);
@@ -434,9 +435,9 @@ const Header = function ({ location , funcs  ,colormodesettle }) {
           <div>
             <NavLink to="/"> 
               <img
-                className="superkluster-logo"
                 src={logoSrc}
                 alt="superkluster-logo"
+                style={window.innerWidth < 365 ? {height:'40px'}:{height:'49px'}}
               />
             </NavLink>
           </div>
@@ -453,8 +454,6 @@ const Header = function ({ location , funcs  ,colormodesettle }) {
                 value={isSearchLabel}
               />
           </div>
-
-          <div className="margin-auto"></div>
 
           {/* Main menu */}
           <BreakpointProvider>
@@ -490,6 +489,25 @@ const Header = function ({ location , funcs  ,colormodesettle }) {
                       </div>
                     </div>
                   </div>
+                  <div className="navbar-item">
+                    <div className="menuRef" ref={ref2}>
+                      <div
+                        className="dropdown-custom btn"
+                        onMouseEnter={handleBtnClick2}
+                        onMouseLeave={closeMenu2}
+                      >
+                        Stats <FaAngleDown/>
+                        <span className="lines"></span>
+                        {openMenu2 && (
+                          <div className="item-dropdown">
+                            <div className="dropdown" onClick={closeMenu2}> 
+                              <NavLink to="/ranking" className="nav-link-style"><NavMenuIcon><FaChartBar className="nav-menu-icon-style" /></NavMenuIcon>Rankings</NavLink>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
                   {
                     accessToken ?
                       <div className="navbar-item">
@@ -518,13 +536,7 @@ const Header = function ({ location , funcs  ,colormodesettle }) {
                 </div>
               </Breakpoint>
             </BreakpointProvider>
-
-            <SearchInputTriggerButton
-              className="search-trigger-btn"
-            >
-              <SearchOutlined style={{fontSize: '22px'}} />
-            </SearchInputTriggerButton>   
-
+            
             {
               accessToken ?
               <>
@@ -552,9 +564,10 @@ const Header = function ({ location , funcs  ,colormodesettle }) {
                 Sign in
               </LocalButton>
             }
-            <ThemeToggleBtn  funcs={funcs1} colormodesettle={colormodesettle1}/>
-
-            <NavDrawer  funcs={funcs} colormodesettle={colormodesettle} /> 
+            {/* Theme Toggle Button bodyStyle={{
+          height: 'calc(100vh - 40px)'
+        }} */}
+            <ThemeToggleBtn  funcs={funcs1} colormodesettle={colormodesettle1}/> 
         </div>
       </HeaderBar>
       <CartModal 

@@ -11,6 +11,10 @@ export const MenuIconDiv = styled.div`
     align-items: center;
     cursor: pointer;
     position: relative;
+
+    @media (max-width: 899px) {
+        display: none;
+    }
 `;
 
 export const ProfileMenu = styled(Menu)`

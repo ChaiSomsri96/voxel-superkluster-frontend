@@ -64,7 +64,7 @@ const GlobalStyles = createGlobalStyle`
     color: ${props => props.theme.primaryColor} !important;
   } 
 
-  header#myHeader , .navbar.white .btn  , .navbar.sticky.white .btn {
+  header#myHeader , .navbar.white .btn  , .navbar.sticky.white .btn , .nav-drawer-icons {
     color: ${({ theme }) => theme.headerColor};
   }
   ::placeholder {
