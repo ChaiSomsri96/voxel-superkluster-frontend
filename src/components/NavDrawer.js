@@ -27,7 +27,7 @@ const MenuIconDiv = styled.div`
     position: relative;
 `;
 
-function NavDrawer({funcs, colormodesettle}) {
+function NavDrawer({funcs, colormodesettle, onOpenCartModal}) {
 
   const { SubMenu } = Menu;
   const account = localStorage.getItem('account');
@@ -49,6 +49,11 @@ function NavDrawer({funcs, colormodesettle}) {
   const signIn = () => {
     setVisible(false);
     navigate('/wallet');
+  }
+
+  const showCartPopup = () => {
+    setVisible(false);
+    onOpenCartModal();
   }
 
   return (
@@ -123,7 +128,7 @@ function NavDrawer({funcs, colormodesettle}) {
                   <FaBell size={16} />
               </MenuIconDiv>
 
-              <MenuIconDiv className="header-shopping-cart">
+              <MenuIconDiv className="header-shopping-cart" onClick={showCartPopup}>
                   {
                     cartInfo && cartInfo.data && cartInfo.data.length > 0 ?
                     <div className="badge">

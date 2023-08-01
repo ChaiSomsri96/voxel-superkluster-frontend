@@ -35,7 +35,7 @@ const CollectinoName = styled.div`
     }
 `
 const NFTName = styled.div`
-    font-size: 17px;
+    font-size: 16px;
     line-height: 22px;
     font-weight: 800;
     color: ${props => props.theme.primaryColor};
@@ -51,14 +51,14 @@ const SeparateLine = styled.div`
 
 const SaleCaption = styled.div`
     color: ${props => props.theme.saleCaptionColor};
-    font-size: 15px;
+    font-size: 14px;
     line-height: 20px;
     font-weight: 500;
 `
 
 const SaleInfo = styled.div`
     color: ${props => props.theme.primaryColor};
-    font-size: 16px;
+    font-size: 15px;
     line-height: 21px;
     font-weight: 400;
 `

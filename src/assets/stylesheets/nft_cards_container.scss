@@ -1,10 +1,71 @@
 .nft-cards-container {
     flex-grow: 1;
 
-    .cards-component {
+    .filter_on.cards-component {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(calc((100% - 75px) / 4), 1fr));
         grid-gap: 25px;
+
+        @media (max-width:1699px) {
+            grid-gap: 15px;
+            grid-template-columns: repeat(auto-fill, minmax(calc((100% - 45px) / 4), 1fr));
+        }
+
+        @media (max-width:1499px) {
+            grid-gap: 25px;
+            grid-template-columns: repeat(auto-fill, minmax(calc((100% - 50px) / 3), 1fr));
+        }
+
+        @media (max-width:1399px) {
+            grid-gap: 15px;
+            grid-template-columns: repeat(auto-fill, minmax(calc((100% - 30px) / 3), 1fr));
+        }
+
+        @media (max-width:1299px) {
+            grid-gap: 25px;
+            grid-template-columns: repeat(auto-fill, minmax(calc((100% - 25px) / 2), 1fr));
+        }
+    }
+
+    .filter_off.cards-component {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(calc((100% - 100px) / 5), 1fr));
+        grid-gap: 25px;
+
+        @media (max-width:1699px) {
+            grid-gap: 15px;
+            grid-template-columns: repeat(auto-fill, minmax(calc((100% - 60px) / 5), 1fr));
+        }
+
+        @media (max-width:1544px) {
+            grid-gap: 25px;
+            grid-template-columns: repeat(auto-fill, minmax(calc((100% - 75px) / 4), 1fr));
+        }
+
+        @media (max-width:1339px) {
+            grid-gap: 15px;
+            grid-template-columns: repeat(auto-fill, minmax(calc((100% - 45px) / 4), 1fr));
+        }
+
+        @media (max-width:1109px) {
+            grid-gap: 25px;
+            grid-template-columns: repeat(auto-fill, minmax(calc((100% - 50px) / 3), 1fr));
+        }
+
+        @media (max-width:974px) {
+            grid-gap: 15px;
+            grid-template-columns: repeat(auto-fill, minmax(calc((100% - 30px) / 3), 1fr));
+        }
+
+        @media (max-width:788px) {
+            grid-gap: 25px;
+            grid-template-columns: repeat(auto-fill, minmax(calc((100% - 25px) / 2), 1fr));
+        }
+
+        @media (max-width:563px) {
+            grid-gap: 25px;
+            grid-template-rows: 1fr;
+        }
     }
 
     .pagination-bar {

@@ -28,7 +28,7 @@ import * as actions from "../../store/actions/thunks";
 import { Axios } from "../../core/axios";
 import Swal from 'sweetalert2' ;
 import NavDrawer from "./../NavDrawer";
-import { SearchOutlined } from '@ant-design/icons';
+import { SearchOutlined, CloseOutlined } from '@ant-design/icons';
 
 setDefaultBreakpoints([{ xs: 0 }, { l: 1199 }, { xl: 1200 }]);
 
@@ -55,6 +55,13 @@ const SearchInputTriggerButton = styled.div`
   cursor: pointer;
 `;
 
+const SearchInputCloseButton = styled.div`
+  color: ${props => props.theme.primaryColor};
+  cursor: pointer;
+  padding-left: 10px;
+  padding-right: 10px;
+`;
+
 const QuickSearchInput = styled.input`
     color: ${props => props.theme.secondaryColor};
 `
@@ -64,6 +71,14 @@ const HeaderBar = styled.header`
 
   .quick-search {
     background: ${props => props.theme.headerSearchBkColor};
+  }
+
+  .quick-search-mobile-div {
+    background: ${props => props.theme.headerSearchBkColor};
+    border-radius: 6px;
+    flex: 1;
+    display: flex;
+    align-items: center;
   }
 `
 
@@ -94,6 +109,8 @@ const Header = function ({ location , funcs  ,colormodesettle }) {
 
   const [isSigninDisplay, setSigninDisplay] = useState("block");
   const [isMenuIconDisplay, setMenuIconDisplay] = useState("none");
+  
+  const [clickedSearch, setClickedSearch] = useState(false);
 
   // open cart popup
   const [cartPopupOpen, setCartPopupOpen] = useState(false);
@@ -109,12 +126,6 @@ const Header = function ({ location , funcs  ,colormodesettle }) {
     position: 'inherit',
 
     marginLeft: '20px'
-  }
-
-  const menuIconStyle = {
-    background: 'transparent', 
-    borderColor: 'transparent',
-    boxShadow: 'none'
   }
 
   function useWindowSize() {
@@ -323,6 +334,13 @@ const Header = function ({ location , funcs  ,colormodesettle }) {
     navigate('/');
   }
 
+  const searchBtnTrigger = () => {
+    setClickedSearch(true);
+  }
+
+  const closeSearchInput = () => {
+    setClickedSearch(false);
+  }
 
   const showCartPopup = () => {
     setCartPopupOpen(true);
@@ -330,6 +348,9 @@ const Header = function ({ location , funcs  ,colormodesettle }) {
   const handleCancel = () => {
     setCartPopupOpen(false);
   };
+  const handleOpenCartModal = () => {
+    setCartPopupOpen(true);
+  }
   // Menu Setting Functions
   // Explore
   const handleExploreBtn = () => {
@@ -387,6 +408,8 @@ const Header = function ({ location , funcs  ,colormodesettle }) {
     if(colormodesettle.ColorMode) setlogoSrc("/image/logo/light_sk_logo.png") ;
     else setlogoSrc("/image/logo/dark_sk_logo.png")
     if(width < 600) setlogoSrc("/image/logo/mobile_logo.png");
+
+    if(width >= 760) setClickedSearch(false);
   },[colormodesettle.ColorMode, width]) ;
 
   useEffect(() => {
@@ -431,16 +454,43 @@ const Header = function ({ location , funcs  ,colormodesettle }) {
       <HeaderBar id="myHeader" className="navbar white">
         
         <div className="main-container header-container">
-          <div>
-            <NavLink to="/"> 
-              <img
-                className="superkluster-logo"
-                src={logoSrc}
-                alt="superkluster-logo"
-              />
-            </NavLink>
-          </div>
+
+          {
+            clickedSearch ? 
+            null
+            :
+            <div>
+              <NavLink to="/"> 
+                <img
+                  className="superkluster-logo"
+                  src={logoSrc}
+                  alt="superkluster-logo"
+                />
+              </NavLink>
+            </div>
+          }
           
+          
+          {
+            clickedSearch ?
+            <div className="quick-search-mobile-div">
+              <QuickSearchInput
+                className="quick-search-mobile"
+                type="text"
+                onChange={handleSearchInput}
+                onKeyPress={handleKeyPress}
+                value={isSearchLabel}
+                name="quick_search"
+                placeholder="Find your next NFT"
+              />
+              <SearchInputCloseButton onClick={() => closeSearchInput()}>
+                <CloseOutlined style={{fontSize: '22px'}} />
+              </SearchInputCloseButton>
+            </div>
+            :
+            null
+          }
+
           <div className="search">
               <QuickSearchInput
                 id="quick_search"
@@ -518,12 +568,19 @@ const Header = function ({ location , funcs  ,colormodesettle }) {
                 </div>
               </Breakpoint>
             </BreakpointProvider>
-
-            <SearchInputTriggerButton
-              className="search-trigger-btn"
-            >
-              <SearchOutlined style={{fontSize: '22px'}} />
-            </SearchInputTriggerButton>   
+            
+            {
+              clickedSearch ?
+              null
+              :
+              <SearchInputTriggerButton
+                className="search-trigger-btn"
+                onClick={() => searchBtnTrigger()}
+              >
+                <SearchOutlined style={{fontSize: '22px'}} />
+              </SearchInputTriggerButton>   
+            }
+            
 
             {
               accessToken ?
@@ -542,19 +599,30 @@ const Header = function ({ location , funcs  ,colormodesettle }) {
                   }
                   <FaShoppingCart size={16} />
                 </MenuIconDiv>
-
-                <Dropdown overlay={() => ProfileMenuOverlay(user)} overlayStyle={{ marginTop: '15px' }} placement={"bottomRight"} trigger={["click"]}>
-                  <AvatarIcon style={avatarStyle} />
-                </Dropdown>
+                {
+                  clickedSearch ?
+                    null
+                  :
+                    <Dropdown overlay={() => ProfileMenuOverlay(user)} overlayStyle={{ marginTop: '15px' }} placement={"bottomRight"} trigger={["click"]}>
+                      <AvatarIcon style={avatarStyle} />
+                    </Dropdown>
+                }
+                
               </>
               :
               <LocalButton className="connect-wallet" to="/wallet">
                 Sign in
               </LocalButton>
             }
-            <ThemeToggleBtn  funcs={funcs1} colormodesettle={colormodesettle1}/>
 
-            <NavDrawer  funcs={funcs} colormodesettle={colormodesettle} /> 
+            {
+              clickedSearch ?
+              null
+              :
+              <ThemeToggleBtn  funcs={funcs1} colormodesettle={colormodesettle1}/>
+            }
+
+            <NavDrawer  funcs={funcs} colormodesettle={colormodesettle} onOpenCartModal={handleOpenCartModal} /> 
         </div>
       </HeaderBar>
       <CartModal 

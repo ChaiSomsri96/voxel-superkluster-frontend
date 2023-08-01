@@ -123,7 +123,7 @@ const ExplorePage = ({colormodesettle}) => {
         </div>
         <div style={{paddingTop: '20px', display: 'flex', gap: '25px'}}>
           { isLeftFilterBarVisible && <LeftFilterBar onFilter={handleOnFilter}  colormodesettle={colormodesettle} /> }
-          <NftCardsContainer filterData={filterData} />
+          <NftCardsContainer filterData={filterData} isLeftFilterBarVisible={isLeftFilterBarVisible} />
         </div>
       </div>
     </Container>
