@@ -8,4 +8,22 @@
     position: relative;
     border-radius: 16px;
     padding: 0px;
+
+    @media(max-width: 1199px) {
+        height: 200px;
+    }
+
+    .banner-text {
+        color: #fff;
+        font-size: 46px;
+        line-height: 62px;
+        font-weight: 800;
+      
+        text-shadow: rgb(0 0 0 / 50%) 2px 2px 2px;
+
+        @media(max-width: 1199px) {
+            font-size: 32px;
+            line-height: 43px;
+        }
+    }
 }

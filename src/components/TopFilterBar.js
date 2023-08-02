@@ -91,7 +91,16 @@ const FilterButton = styled.button`
 
 const SearchSection = styled.div`
     background: ${props => props.theme.searchSectionBkColor};    
-    flex-grow: 1;
+    
+    
+    @media(min-width: 772px) {
+        flex-grow: 1;
+    }
+
+    @media(max-width: 771px) {
+        width: 100%;
+    }
+
     height: 51px;
     border-radius: 6px;
     display: flex;
@@ -173,7 +182,7 @@ const TopFilterBar = ({ colormodesettle, clickFilterButton, onFilter }) => {
         <>
         <div className='top-filter-bar'>
             {
-                <div>
+                <div className='pc-filter-button'>
                     <FilterButton onClick={() => onClickFilterButton()}>
                         {
                             filter ?
@@ -207,7 +216,28 @@ const TopFilterBar = ({ colormodesettle, clickFilterButton, onFilter }) => {
             }
 
             {
-                <div className='dropdownSelect one' style={{ width: "200px" }}>
+                <div className='mobile-filter-button'>
+                    <FilterButton onClick={() => onClickFilterButton()}>
+                        {
+                            filter ?
+                            (
+                                colormodesettle.ColorMode ? 
+                                <LightFilterIcon />
+                                :
+                                <DarkFilterIcon />
+                            )
+                            :
+                            <FiChevronLeftIcon />
+                        }
+                        <span style={{marginLeft: '10px'}}>
+                            Filters
+                        </span>
+                    </FilterButton>
+                </div>
+            }
+
+            {
+                <div className='dropdownSelect one'>
                     <Select 
                         options={orderList} 
                         style={{ width: "100%" }}

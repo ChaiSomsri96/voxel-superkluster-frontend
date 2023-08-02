@@ -1,6 +1,13 @@
 .top-filter-bar {
     display: flex;
+
+    flex-wrap: wrap;
+
     gap: 20px;
+
+    @media(max-width: 500px) {
+        gap: 10px;
+    }
 
     .icon-btn-radius {
         border-radius: 6px;
@@ -20,6 +27,30 @@
         .grid-icon {
             width: 20px;
             height: 20px;
+        }
+
+        @media(max-width: 899px) {
+            display: none;
+        }
+    }
+
+    .dropdownSelect {
+        width: 200px;
+
+        @media(max-width: 771px) {
+            flex-grow: 1;
+        }
+    }
+
+    .mobile-filter-button {
+        @media(min-width: 772px) {
+            display: none;
+        }
+    }
+
+    .pc-filter-button {
+        @media(max-width: 771px) {
+            display: none;
         }
     }
 }
