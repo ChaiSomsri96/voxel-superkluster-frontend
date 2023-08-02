@@ -110,7 +110,7 @@ const ExplorePage = ({colormodesettle}) => {
     <Container>
       <div className="main-container">
         <section className='explore-banner label-center'>
-          <div className='banner-label'>
+          <div className='banner-text'>
             Explore
           </div>
         </section>

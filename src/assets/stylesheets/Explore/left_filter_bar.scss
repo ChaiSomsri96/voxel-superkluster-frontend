@@ -1,9 +1,15 @@
 .left-filter-section {
 
     height: calc(100vh - 100px - 40px); /* Adjust the value based on your top menu height */
+        
     overflow-y: auto;
     position: sticky;
     top: 120px;
+
+    @media(max-width: 1199px) {
+        height: calc(100vh - 40px);
+        top: 20px;
+    }
 
     padding-top: 20px;
     padding-bottom: 20px;
