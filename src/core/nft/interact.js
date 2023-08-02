@@ -351,7 +351,6 @@ export const getListAction = async (param, data, rowData, datas, library) => {
     if (!isOperator) {
       const tx = await contract.methods.setApprovalForAll(operator, true).send({ from: owner });
       
-      // Changing the value of the res variable according to the result of the transaction.
       res = {
         status: tx.status,
         txHash: tx.transactionHash
