@@ -72,7 +72,7 @@ const ItemTab = ({ colormodesettle, collectionId }) => {
                     {
                         isLeftFilterBarVisible && <LeftFilterBar onFilter={handleOnFilter} colormodesettle={colormodesettle} detail={true} />
                     }  
-                    <NftCardsContainer filterData={{ ...filterData, collection: collectionId }}  />
+                    <NftCardsContainer filterData={{ ...filterData, collection: collectionId }} isLeftFilterBarVisible={isLeftFilterBarVisible}  />
                 </div>
             </div>
         </>
