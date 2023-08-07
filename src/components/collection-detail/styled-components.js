@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { FaTelegramPlane, FaTwitter, FaInstagram, 
     FaDiscord, FaGlobe, FaRegStar, FaShareAlt } from 'react-icons/fa';
 
+import {BsChevronDown, BsChevronUp} from "react-icons/bs";
+
 export const Container = styled.div`
   background-color: ${props => props.theme.primBgColor};
   padding-top: 100px;
@@ -33,9 +35,20 @@ export const CollectionPre = styled.div`
 export const CollectionDesc = styled.div`
     color: ${props => props.theme.primaryColor};
     font-size: 16px;
+    line-height: 24px;
     font-weight: 400;
     word-break: keep-all; 
     white-space:pre-wrap;
+
+    width: 900px;
+`;
+
+export const ShowMoreText = styled.div`
+    font-size: 16px;
+    line-height: 22px;
+    color: ${props => props.theme.primaryColor};
+    margin-right: 12px;
+    font-weight: 400;
 `;
 
 export const CollectionFactor = styled.div`
@@ -47,6 +60,13 @@ export const CollectionFactor = styled.div`
 
 export const SocialIconBtn = styled.div`
     font-size: 24px;
+    color: ${props => props.theme.primaryColor};
+`;
+
+export const BsChevronDownIcon = styled(BsChevronDown)`
+    color: ${props => props.theme.primaryColor};
+`;
+export const BsChevronUpIcon = styled(BsChevronUp)`
     color: ${props => props.theme.primaryColor};
 `;
 

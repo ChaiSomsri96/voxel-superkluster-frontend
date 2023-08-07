@@ -1,4 +1,4 @@
-import React, { memo, useState , useEffect} from 'react' ;
+import React, { memo, useState , useEffect, useRef} from 'react' ;
 import { Axios } from "./../core/axios";
 import { formatMarketplaceNumber, formatCreatedDate, directLink, usdPriceItemDetailPage } from "./../utils";
 import collectionDefaultBanner from "./../assets/image/collection_default_banner.jpg";
@@ -6,7 +6,7 @@ import "./../assets/stylesheets/CollectionDetail/index.scss";
 import { ReactComponent as VerifyIcon } from "./../assets/svg/small_verify.svg";
 import { Container, CollectionName, CollectionCon, CollectionPre, CollectionFactor, SocialIconBtn,
   ColAvatar, CollectionDesc, FaTwitterIcon, FaInstagramIcon,
-  FaDiscordIcon, FaTelegramPlaneIcon, FaGlobeIcon, FaRegStarIcon, FaShareAltIcon, Splitter
+  FaDiscordIcon, FaTelegramPlaneIcon, FaGlobeIcon, FaRegStarIcon, FaShareAltIcon, Splitter, ShowMoreText
 } from "./../components/collection-detail/styled-components";
 import defaultAvatar from "./../assets/image/default_avatar.jpg";
 import ItemTab from "./../components/collection-detail/ItemTab";
@@ -17,12 +17,19 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import "./../assets/stylesheets/react-tabs.scss";
 
+import { ReactComponent as AngleDownDark } from "./../assets/svg/angle_down_dark.svg";
+import { ReactComponent as AngleUpDark } from "./../assets/svg/angle_up_dark.svg";
+
+import { ReactComponent as AngleDownLight } from "./../assets/svg/angle_down_light.svg";
+import { ReactComponent as AngleUpLight } from "./../assets/svg/angle_up_light.svg";
+
 
 const CollectionDetailPage = function ({ colormodesettle }) {
   const { collectionId } = useParams();
+  
+  const descriptionRef = useRef(null);
 
   const accessToken = localStorage.getItem('accessToken');
-  const header = { 'Authorization': `Bearer ${accessToken}` };
 
   const history = createBrowserHistory();
 
@@ -33,6 +40,9 @@ const CollectionDetailPage = function ({ colormodesettle }) {
   const [isVerified , setVerified] = useState(false) ;
   const [isusdPrice , setUsdPrice] = useState();
   const [ethPrice , setEthPrice] = useState(1);
+
+  const [showMoreButton, setShowMoreButton] = useState(false);
+  const [showMore, setShowMore] = useState(false);
 
   const [tabIndex, setTabIndex] = useState(() => {
     let currentUrlParams = new URLSearchParams(window.location.search);
@@ -80,6 +90,20 @@ const CollectionDetailPage = function ({ colormodesettle }) {
     }
   }, [collectionId]);
 
+  useEffect(() => {
+    if(isDetailData) {
+      const descriptionContent = descriptionRef.current;
+      const lineHeight = parseFloat(getComputedStyle(descriptionContent).lineHeight);
+      const contentHeight = descriptionContent.scrollHeight;
+      if (contentHeight < lineHeight * 2) {
+        setShowMoreButton(false)
+      }
+      else {
+        setShowMoreButton(true)
+      }
+    }
+  }, [isDetailData])
+
   return (
     <Container>
       <div className="main-container collection-detail">
@@ -113,10 +137,45 @@ const CollectionDetailPage = function ({ colormodesettle }) {
             </div>
 
             <div className='paragraph'></div>
+            
+            <div>
+              <CollectionDesc ref={descriptionRef} className={`${showMore ? '' : 'see-less'}`}>
+                {isDetailData && isDetailData.description ? isDetailData.description : null}
+              </CollectionDesc>
 
-            <CollectionDesc>
-              {isDetailData && isDetailData.description ? isDetailData.description : null}
-            </CollectionDesc>
+              {
+                showMoreButton ?
+                <div className={`show-more-btn`} onClick={() => setShowMore(!showMore)}>
+
+                  {
+                    showMore ?
+                    <>
+                      <ShowMoreText>See less</ShowMoreText>
+                      {
+                        colormodesettle.ColorMode ?
+                        <AngleUpLight />
+                        :
+                        <AngleUpDark />
+                      }
+                    </>
+                    :
+                    <>
+                      <ShowMoreText>See more</ShowMoreText>
+                      {
+                        colormodesettle.ColorMode ?
+                        <AngleDownLight />
+                        :
+                        <AngleDownDark />
+                      }
+                    </>
+                  }
+                  
+                </div>
+                :
+                null
+              }
+            </div>
+
             <div style={{display: 'flex', marginTop: '30px'}}>
               <div>
                 <CollectionFactor>{formatMarketplaceNumber(isDetailData ? isDetailData.total_assets : 0)}</CollectionFactor>

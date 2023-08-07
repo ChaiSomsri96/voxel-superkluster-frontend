@@ -33,6 +33,21 @@
         height: 16px;
     }
 
+    .see-less {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+    }
+
+    .show-more-btn {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        margin-top: 15px;
+    }
+
     // tabs
     .ant-tabs-tab {
         padding: 10px 0;
