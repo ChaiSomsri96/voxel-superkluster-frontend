@@ -16,7 +16,7 @@ const NoDataDiv = styled.div`
   text-align: center;
 `;
 
-const NftCardsContainer = ({ filterData, isLeftFilterBarVisible }) => {
+const NftCardsContainer = ({ filterData, isLeftFilterBarVisible, modalLeftFilterBar }) => {
     const accessToken = localStorage.getItem('accessToken');
     const header = { 'Authorization': `Bearer ${accessToken}` };
     const history = createBrowserHistory();
@@ -174,7 +174,7 @@ const NftCardsContainer = ({ filterData, isLeftFilterBarVisible }) => {
             <div className="nft-cards-container">
                 {
                     isLoading ?
-                    <div className={`cards-component ${isLeftFilterBarVisible ? 'filter_on' : 'filter_off'}`}>
+                    <div className={`cards-component ${!modalLeftFilterBar && isLeftFilterBarVisible ? 'filter_on' : 'filter_off'}`}>
                         {
                             Array.from({ length: pageSize }, (_, index) => (
                                 <EmptyCard key={index} />
@@ -182,7 +182,7 @@ const NftCardsContainer = ({ filterData, isLeftFilterBarVisible }) => {
                         }
                     </div>
                     : tempArr && tempArr.length  ?
-                    <div className={`cards-component ${isLeftFilterBarVisible ? 'filter_on' : 'filter_off'}`}>
+                    <div className={`cards-component ${!modalLeftFilterBar && isLeftFilterBarVisible ? 'filter_on' : 'filter_off'}`}>
                         {
                             tempArr.map((nft ,index) => (
                                 <NFTCard key={index} nft={nft} margin={0} canPurchase={true} />

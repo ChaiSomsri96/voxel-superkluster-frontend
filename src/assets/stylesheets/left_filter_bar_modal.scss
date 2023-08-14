@@ -1,0 +1,85 @@
+.left-filter-bar-modal {
+    margin: 0px auto;   
+
+    @media (min-width: 500px) {
+        width: 400px !important;
+    }
+
+    @media (max-width: 499px) {
+        width: calc(100% - 40px) !important;    
+    }
+
+    .ant-modal-content {
+        border-radius: 10px;
+        height: calc(100vh - 40px);
+        .ant-modal-close {
+            top: 6px;
+            right: 4px;
+
+            .ant-modal-close-x {
+                font-size: 20px;   
+            }
+        }
+
+        .ant-modal-body {
+            padding: 20px 60px;
+
+            @media (max-width: 499px) {
+                padding: 20px 20px;
+            }
+
+            height: calc(100% - 75px);
+
+            .overflow-content {
+                overflow-y: auto;
+                height: 100%;
+            }
+
+            .rotate-up {
+                transform: rotate(180deg);
+                transition: transform 0.3s ease-in-out;
+            }
+              
+            .rotate-down {
+                transform: rotate(360deg);
+                transition: transform 0.3s ease-in-out;
+            }
+
+            .collapse-line {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                cursor: pointer;
+            }
+
+            .checkbox-section {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                padding-top: 20px;
+            }
+
+            .apply-button {
+                width: 100%;
+            }
+        
+            .apply-button:disabled {
+                background-color: rgb(216 212 212) !important;
+                box-shadow: none !important;
+                transition: none !important;
+                cursor: default !important;
+            }
+        }
+    }
+
+    .ant-modal-header {
+        border-radius: 10px 10px 0 0;
+        padding: 28px 20px;
+
+        .ant-modal-title {
+            font-size: 18px;
+            line-height: 18px;
+            font-weight: 800;
+        }
+    }
+}
