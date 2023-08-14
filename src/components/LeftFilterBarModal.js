@@ -1,23 +1,32 @@
-import React, { memo, useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Select } from 'antd';
-import styled from 'styled-components';
-import SkCheckbox from "./SkCheckbox";
+import React, { useState, useEffect, memo } from 'react';
+import { Modal } from "antd";
 import { FiChevronUp } from "react-icons/fi";
-import "./../assets/stylesheets/Explore/left_filter_bar.scss";
+import "./../assets/stylesheets/left_filter_bar_modal.scss";
+import styled from 'styled-components';
 import { currencyList, chainList, statusList } from "./../components/constants/filters";
+import SkCheckbox from "./SkCheckbox";
+import { Select } from 'antd';
 import LocalButton from './common/Button';
-
-import * as actions from "../store/actions/thunks";
+import { useDispatch, useSelector } from 'react-redux';
 import * as selectors from '../store/selectors';
+import * as actions from "../store/actions/thunks";
+const PriceDiv = styled.div`
+    width: 80px;
 
-const FilterSection = styled.div`
-    width: 340px;
-    border-radius: 10px;
-    border: 1px solid ${props => props.theme.filterBorder};
+    background: ${props => props.theme.bannerSlideIconColor};
+`;
 
-    padding-left: 24px;
-    padding-right: 24px;
+const FirstFilterPart = styled.div`
+    padding-bottom: 20px;
+    border-bottom: 1px solid ${props => props.theme.filterBorder};
+`;
+
+const Span =  styled.div`
+    font-size: 16px;
+    font-weight: 500;
+    color: ${props => props.theme.checkBoxTextColor};
+
+    user-select: none;
 `;
 
 const FilterCaption = styled.div`
@@ -35,28 +44,9 @@ const FilterPart = styled.div`
     border-bottom: 1px solid ${props => props.theme.filterBorder};
 `;
 
-const FirstFilterPart = styled.div`
-    padding-bottom: 20px;
-    border-bottom: 1px solid ${props => props.theme.filterBorder};
-`;
-
-const Span =  styled.div`
-    font-size: 16px;
-    font-weight: 500;
-    color: ${props => props.theme.checkBoxTextColor};
-
-    user-select: none;
-`;
-
 const FiChevronUpIcon = styled(FiChevronUp)`
     font-size: 20px;
     color: ${props => props.theme.primaryColor};
-`;
-
-const PriceDiv = styled.div`
-    width: 80px;
-
-    background: ${props => props.theme.bannerSlideIconColor};
 `;
 
 const Label = styled.div`
@@ -65,17 +55,17 @@ const Label = styled.div`
     color: ${props => props.theme.saleCaptionColor};
 `;
 
-const LeftFilterBar = ({ colormodesettle, detail, onFilter, isLeftFilterBarVisible, triggerForceHiddenLeftFilterBar}) => {
+const LeftFilterBarModal = ({cartPopupOpen, handleCancel, colormodesettle, onFilter, detail}) => {
     const dispatch = useDispatch();
 
     const category = useSelector(selectors.categoryState).data;
-    // collapse/expand state variables
+
     const [isStatus, setIsStatus] = useState(true);
     const [isCategory, setIsCategory] = useState(true);
+    const [isPrice, setIsPrice] = useState(true);
     const [isChain, setIsChain] = useState(true);
     const [isCollection, setIsCollection] = useState(true);
     const [isProperties, setIsProperties] = useState(true);
-    const [isPrice, setIsPrice] = useState(true);
 
     const [currency, setCurrency] = useState(() => {
         const queryParams = new URLSearchParams(window.location.search);
@@ -92,8 +82,8 @@ const LeftFilterBar = ({ colormodesettle, detail, onFilter, isLeftFilterBarVisib
         const searchValueParam = queryParams.get('filterdata[price_range][max_price]');
         return searchValueParam ? searchValueParam : '';
     });
-    const [priceApplyDisable, setPriceApplyDisable] = useState(true);
-    
+    const [priceApplyDisable, setPriceApplyDisable] = useState(true)
+
     // filter data
     const [statusData, setStatusData] = useState(() => {
         const queryParams = new URLSearchParams(window.location.search);
@@ -111,6 +101,7 @@ const LeftFilterBar = ({ colormodesettle, detail, onFilter, isLeftFilterBarVisib
 
         return [];
     });
+
     const [filterStatus, setFilterStatus] = useState(() => {
         const queryParams = new URLSearchParams(window.location.search);
         const filterStatusParams = []; 
@@ -149,6 +140,7 @@ const LeftFilterBar = ({ colormodesettle, detail, onFilter, isLeftFilterBarVisib
 
         return [];
     });
+
     const [filterCategory, setFilterCategory] = useState(() => {
         const queryParams = new URLSearchParams(window.location.search);
         const filterCategoryParams = []; 
@@ -169,7 +161,7 @@ const LeftFilterBar = ({ colormodesettle, detail, onFilter, isLeftFilterBarVisib
         }
 
         return {};
-    });    
+    });
 
     const [chainData, setChainData] = useState(() => {
         const queryParams = new URLSearchParams(window.location.search);
@@ -187,6 +179,7 @@ const LeftFilterBar = ({ colormodesettle, detail, onFilter, isLeftFilterBarVisib
 
         return [];
     });
+
     const [filterChain, setFilterChain] = useState(() => {
         const queryParams = new URLSearchParams(window.location.search);
         const filterChainParams = []; 
@@ -215,7 +208,6 @@ const LeftFilterBar = ({ colormodesettle, detail, onFilter, isLeftFilterBarVisib
              }
     }, [dispatch, detail]);
 
-
     useEffect(() => {
         if(!currency) {
             setPriceApplyDisable(true);
@@ -242,7 +234,7 @@ const LeftFilterBar = ({ colormodesettle, detail, onFilter, isLeftFilterBarVisib
 
     const handleChainClick = () => {
         setIsChain(!isChain);
-    } 
+    }
 
     const handleCollectionClick = () => {
         setIsCollection(!isCollection);
@@ -316,7 +308,7 @@ const LeftFilterBar = ({ colormodesettle, detail, onFilter, isLeftFilterBarVisib
 
         setMinPrice(val);
     }
-
+    
     const setMaxPriceVal = (val) => {
         if(!(/^[\d.]+$/.test(val) || val.length === 0))
             return;
@@ -338,16 +330,23 @@ const LeftFilterBar = ({ colormodesettle, detail, onFilter, isLeftFilterBarVisib
 
     return (
         <>
-            <FilterSection className={`left-filter-section ${!isLeftFilterBarVisible ? 'left-filter-section-hidden' : ''}`}>
-                <div className='overflow-content'>
-                    <FirstFilterPart>
-                        <div className='collapse-line' onClick={() => handleStatusClick()}>
-                            <FilterCaption>
-                                Status
-                            </FilterCaption>
-                            <FiChevronUpIcon
-                            className={!isStatus ? 'rotate-up' : 'rotate-down'} />
-                        </div>
+        <Modal
+            className='left-filter-bar-modal tool-bar-modal'
+            open={cartPopupOpen}
+            onCancel={handleCancel}
+            footer={null}
+            centered={true}
+            title="Filters"
+        >
+            <div className='overflow-content'>
+                <FirstFilterPart>
+                    <div className='collapse-line' onClick={() => handleStatusClick()}>
+                        <FilterCaption>
+                            Status
+                        </FilterCaption>
+                        <FiChevronUpIcon
+                        className={!isStatus ? 'rotate-up' : 'rotate-down'} />
+                    </div>
 
                     {
                         isStatus &&
@@ -366,153 +365,152 @@ const LeftFilterBar = ({ colormodesettle, detail, onFilter, isLeftFilterBarVisib
                             }
                         </div> 
                     }
-                    </FirstFilterPart>
+                </FirstFilterPart>
 
+                <FilterPart>
+                    <div className='collapse-line' onClick={() => handlePriceClick()}>
+                        <FilterCaption>
+                            Price
+                        </FilterCaption>
+                        <FiChevronUpIcon
+                        className={!isPrice ? 'rotate-up' : 'rotate-down'} />
+                    </div>
+
+                    {
+                        isPrice &&
+                        <div style={{paddingTop: '20px'}}>
+                            <div style={{display: 'flex', alignItems: 'center',
+                        justifyContent: 'space-between', marginBottom: '20px'}}>
+                                <div className='dropdownSelect one' style={{ width: "85px" }}>
+                                    <Select 
+                                        options={currencyList} 
+                                        style={{ width: "100%" }} 
+                                        value={currency}
+                                        onChange={handleCurrencyChange}
+                                    ></Select>
+                                </div>
+                                <PriceDiv>
+                                    <input 
+                                        type='text' 
+                                        placeholder="Min" 
+                                        value={minPrice} 
+                                        id='range_min' 
+                                        name='range_min' 
+                                        className='form-control'
+                                        onChange={(e) => setMinPriceVal(e.target.value)} 
+                                    />
+                                </PriceDiv>
+                                <Label>to</Label>
+                                <PriceDiv>
+                                    <input 
+                                        type='text' 
+                                        placeholder="Max" 
+                                        value={maxPrice} 
+                                        id='range_max' 
+                                        name='range_max' 
+                                        className='form-control'
+                                        onChange={(e) => setMaxPriceVal(e.target.value)}
+                                    />
+                                </PriceDiv>
+                            </div>
+
+                            <LocalButton 
+                                disabled={priceApplyDisable} 
+                                className="apply-button"
+                                onClick={() => priceApply()}
+                            >
+                                Apply
+                            </LocalButton>    
+                        </div>
+                        
+                    }
+                </FilterPart>
+                {
+                    !detail && 
                     <FilterPart>
-                        <div className='collapse-line' onClick={() => handlePriceClick()}>
+                        <div className='collapse-line' onClick={() => handleCategoryClick()}>
                             <FilterCaption>
-                                Price
+                                Category
                             </FilterCaption>
                             <FiChevronUpIcon
-                            className={!isPrice ? 'rotate-up' : 'rotate-down'} />
+                            className={!isCategory ? 'rotate-up' : 'rotate-down'} />
                         </div>
 
                         {
-                            isPrice &&
-                            <div style={{paddingTop: '20px'}}>
-                                <div style={{display: 'flex', alignItems: 'center',
-                            justifyContent: 'space-between', marginBottom: '20px'}}>
-                                    <div className='dropdownSelect one' style={{ width: "85px" }}>
-                                        <Select 
-                                            options={currencyList} 
-                                            style={{ width: "100%" }} 
-                                            value={currency}
-                                            onChange={handleCurrencyChange}
-                                        ></Select>
-                                    </div>
-                                    <PriceDiv>
-                                        <input 
-                                            type='text' 
-                                            placeholder="Min" 
-                                            value={minPrice} 
-                                            id='range_min' 
-                                            name='range_min' 
-                                            className='form-control'
-                                            onChange={(e) => setMinPriceVal(e.target.value)} 
-                                        />
-                                    </PriceDiv>
-                                    <Label>to</Label>
-                                    <PriceDiv>
-                                        <input 
-                                            type='text' 
-                                            placeholder="Max" 
-                                            value={maxPrice} 
-                                            id='range_max' 
-                                            name='range_max' 
-                                            className='form-control'
-                                            onChange={(e) => setMaxPriceVal(e.target.value)}
-                                        />
-                                    </PriceDiv>
-                                </div>
-
-                                <LocalButton 
-                                    disabled={priceApplyDisable} 
-                                    className="apply-button"
-                                    onClick={() => priceApply()}
-                                >
-                                    Apply
-                                </LocalButton>    
-                            </div>
+                            isCategory &&
+                            <div className='checkbox-section'>
+                                
+                            {
+                                category?.map((item) => (
+                                    <SkCheckbox
+                                        key={item.id}
+                                        checked={filterCategory[item.id] === true}
+                                        onChange={() => changeFilterCategory(item.id)}
+                                        className={colormodesettle.ColorMode ? "sk-checkbox-light" : "sk-checkbox-dark"}
+                                    >
+                                        <Span style={{marginLeft: '20px'}}>{item.label}</Span>
+                                    </SkCheckbox>
+                                ))
+                            }
                             
+                            </div>
                         }
                     </FilterPart>
-                    {
-                        !detail && 
-                        <FilterPart>
-                            <div className='collapse-line' onClick={() => handleCategoryClick()}>
-                                <FilterCaption>
-                                    Category
-                                </FilterCaption>
-                                <FiChevronUpIcon
-                                className={!isCategory ? 'rotate-up' : 'rotate-down'} />
-                            </div>
+                }
 
-                            {
-                                isCategory &&
-                                <div className='checkbox-section'>
-                                    
+                {
+                    !detail &&
+                    <FilterPart>
+                        <div className='collapse-line' onClick={() => handleChainClick()}>
+                            <FilterCaption>
+                                Chain
+                            </FilterCaption>
+                            <FiChevronUpIcon
+                            className={!isChain ? 'rotate-up' : 'rotate-down'} />
+                        </div>
+                        {
+                            isChain &&
+                            <div className='checkbox-section'>
                                 {
-                                    category?.map((item) => (
+                                    chainList?.map((item) => (
                                         <SkCheckbox
                                             key={item.id}
-                                            checked={filterCategory[item.id] === true}
-                                            onChange={() => changeFilterCategory(item.id)}
+                                            checked={filterChain[item.key] === true}
+                                            onChange={() => changeFilterChain(item.key)}
                                             className={colormodesettle.ColorMode ? "sk-checkbox-light" : "sk-checkbox-dark"}
                                         >
-                                            <Span style={{marginLeft: '20px'}}>{item.label}</Span>
+                                            <div style={{display: 'flex', alignItems: 'center', marginLeft: '20px'}}>
+                                                <img src={item.svg} alt={item.alt} />
+                                                <Span style={{marginLeft: '9px'}}>{item.label}</Span>
+                                            </div>
+                                            
                                         </SkCheckbox>
                                     ))
                                 }
-                                
-                                </div>
-                            }
-                        </FilterPart>
-                    }
-                    
-                    {
-                        !detail &&
-                        <FilterPart>
-                            <div className='collapse-line' onClick={() => handleChainClick()}>
-                                <FilterCaption>
-                                    Chain
-                                </FilterCaption>
-                                <FiChevronUpIcon
-                                className={!isChain ? 'rotate-up' : 'rotate-down'} />
                             </div>
-                            {
-                                isChain &&
-                                <div className='checkbox-section'>
-                                    {
-                                        chainList?.map((item) => (
-                                            <SkCheckbox
-                                                key={item.id}
-                                                checked={filterChain[item.key] === true}
-                                                onChange={() => changeFilterChain(item.key)}
-                                                className={colormodesettle.ColorMode ? "sk-checkbox-light" : "sk-checkbox-dark"}
-                                            >
-                                                <div style={{display: 'flex', alignItems: 'center', marginLeft: '20px'}}>
-                                                    <img src={item.svg} alt={item.alt} />
-                                                    <Span style={{marginLeft: '9px'}}>{item.label}</Span>
-                                                </div>
-                                                
-                                            </SkCheckbox>
-                                        ))
-                                    }
-                                </div>
-                            }
-                        </FilterPart>
-                    }
-                    
-                    {
-                        !detail &&
-                        <FilterPart>
-                            <div className='collapse-line' onClick={() => handleCollectionClick()}>
-                                <FilterCaption>
-                                    Collections
-                                </FilterCaption>
-                                <FiChevronUpIcon
-                                className={!isCollection ? 'rotate-up' : 'rotate-down'} />
-                            </div>
+                        }
+                    </FilterPart>
+                }
 
-                            {
-                                isCollection &&
-                                <></>
-                            }
-                        </FilterPart>
-                    }
+                {
+                    !detail &&
+                    <FilterPart>
+                        <div className='collapse-line' onClick={() => handleCollectionClick()}>
+                            <FilterCaption>
+                                Collections
+                            </FilterCaption>
+                            <FiChevronUpIcon
+                            className={!isCollection ? 'rotate-up' : 'rotate-down'} />
+                        </div>
 
+                        {
+                            isCollection &&
+                            <></>
+                        }
+                    </FilterPart>
+                }
 
-                    {
+                {
                         detail &&
                         <FilterPart>
                             <div className='collapse-line' onClick={() => handlePropertiesClick()}>
@@ -528,11 +526,11 @@ const LeftFilterBar = ({ colormodesettle, detail, onFilter, isLeftFilterBarVisib
                                 <></>
                             }
                         </FilterPart>
-                    }
-                </div>
-            </FilterSection>
+                }
+            </div>
+        </Modal>
         </>
-    );
+    )
 }
 
-export default memo(LeftFilterBar);
+export default memo(LeftFilterBarModal);

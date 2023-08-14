@@ -4,6 +4,7 @@ import { useLocation } from "@reach/router";
 
 import TopFilterBar from "./../components/TopFilterBar";
 import LeftFilterBar from "./../components/LeftFilterBar";
+import LeftFilterBarModal from "./../components/LeftFilterBarModal";
 import NftCardsContainer from "./../components/NftCardsContainer";
 
 import "./../assets/stylesheets/Explore/index.scss";
@@ -19,7 +20,10 @@ const ExplorePage = ({colormodesettle}) => {
   let location = useLocation();
   const { value } = location.state ? location.state : '';
 
+  const [browserWidth, setBrowserWidth] = useState(window.innerWidth);
   const [isLeftFilterBarVisible, setLeftFilterBarVisibility] = useState(true);
+  const [modalLeftFilterBar, setModalLeftFilterBar] = useState(false);
+
   const [filterData, setFilterData] = useState(() => {
     const queryParams = new URLSearchParams(window.location.search);
     
@@ -100,11 +104,39 @@ const ExplorePage = ({colormodesettle}) => {
     setFilterData({...filterData, ..._filterData})
   }
 
+  const handleCancel = () => {
+    setLeftFilterBarVisibility(false);
+  };
+
   useEffect(()=>{
     return ()=>{
       setSearchValue('');
     }
   },[]) ;
+
+  useEffect(() => {
+    const handleResize = () => {
+      setBrowserWidth(window.innerWidth);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (browserWidth < 1040) {
+        if(!modalLeftFilterBar) {
+          setModalLeftFilterBar(true);
+          setLeftFilterBarVisibility(false);
+        }
+    } else {
+        if(modalLeftFilterBar) {
+          setModalLeftFilterBar(false);
+          setLeftFilterBarVisibility(false);
+        }
+    }
+  }, [browserWidth]);
 
   return (
     <Container>
@@ -119,11 +151,27 @@ const ExplorePage = ({colormodesettle}) => {
             colormodesettle={colormodesettle}
             clickFilterButton={handleToggleLeftFilterBar}
             onFilter={handleOnFilter}
-             />
+            isLeftFilterBarVisible={isLeftFilterBarVisible} 
+          />
         </div>
         <div style={{paddingTop: '20px', display: 'flex', gap: '25px'}}>
-          { isLeftFilterBarVisible && <LeftFilterBar onFilter={handleOnFilter}  colormodesettle={colormodesettle} /> }
-          <NftCardsContainer filterData={filterData} isLeftFilterBarVisible={isLeftFilterBarVisible} />
+          {
+            modalLeftFilterBar ?
+            <LeftFilterBarModal
+              cartPopupOpen={isLeftFilterBarVisible}
+              handleCancel={handleCancel}
+              colormodesettle={colormodesettle}
+              onFilter={handleOnFilter} 
+            />
+            :
+            <LeftFilterBar 
+              onFilter={handleOnFilter}  
+              colormodesettle={colormodesettle} 
+              isLeftFilterBarVisible={isLeftFilterBarVisible} 
+            />
+          }
+          
+          <NftCardsContainer filterData={filterData} isLeftFilterBarVisible={isLeftFilterBarVisible} modalLeftFilterBar={modalLeftFilterBar} />
         </div>
       </div>
     </Container>
