@@ -123,7 +123,7 @@ const SearchInput = styled.input`
     font-weight: 400;
 `;
 
-const TopFilterBar = ({ colormodesettle, clickFilterButton, onFilter }) => {
+const TopFilterBar = ({ colormodesettle, clickFilterButton, onFilter,  isLeftFilterBarVisible}) => {
     const [viewMethod, setViewMethod] = useState(localStorage.getItem('viewMethod')? localStorage.getItem('viewMethod'):'detail');
     const [filter, setFilter] = useState(false);
     
@@ -143,6 +143,10 @@ const TopFilterBar = ({ colormodesettle, clickFilterButton, onFilter }) => {
 
         return searchValueParam ? parseInt(searchValueParam) : null;
     });
+    
+    useEffect(() => {
+        setFilter(isLeftFilterBarVisible);
+      }, [isLeftFilterBarVisible]);
 
     const handleDetailClick = async () => {
         setViewMethod('detail');

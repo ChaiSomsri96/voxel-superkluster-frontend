@@ -108,14 +108,6 @@ const ExplorePage = ({colormodesettle}) => {
     setLeftFilterBarVisibility(false);
   };
 
-  /*
-  const triggerForceHiddenLeftFilterBar = (_modal) => {
-    setModalLeftFilterBar(_modal);
-    console.log("triggerForceHiddenLeftFilterBar-------------------------->", _modal);
-    if(_modal)
-      setLeftFilterBarVisibility(false);
-  } */
-
   useEffect(()=>{
     return ()=>{
       setSearchValue('');
@@ -136,10 +128,12 @@ const ExplorePage = ({colormodesettle}) => {
     if (browserWidth < 1040) {
         if(!modalLeftFilterBar) {
           setModalLeftFilterBar(true);
+          setLeftFilterBarVisibility(false);
         }
     } else {
         if(modalLeftFilterBar) {
           setModalLeftFilterBar(false);
+          setLeftFilterBarVisibility(false);
         }
     }
   }, [browserWidth]);
@@ -157,6 +151,7 @@ const ExplorePage = ({colormodesettle}) => {
             colormodesettle={colormodesettle}
             clickFilterButton={handleToggleLeftFilterBar}
             onFilter={handleOnFilter}
+            isLeftFilterBarVisible={isLeftFilterBarVisible} 
           />
         </div>
         <div style={{paddingTop: '20px', display: 'flex', gap: '25px'}}>
