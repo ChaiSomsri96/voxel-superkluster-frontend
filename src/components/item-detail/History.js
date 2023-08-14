@@ -66,7 +66,7 @@ const History = ({nftId}) => {
           catch(err) {
             console.error("loadMoreData Err: ", err);
             setLoading(false);
-        }
+          }
     };
 
     useEffect(() => {
