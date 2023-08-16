@@ -49,8 +49,6 @@ const NftCardsContainer = ({ filterData, isLeftFilterBarVisible, modalLeftFilter
         let queryParams = new URLSearchParams();
         queryParams.append('pagenumber', pageNumber);
 
-        console.log("setURLFilterData:     ", filterData);
-
         if(filterData.sale_type && Array.isArray(filterData.sale_type) && filterData.sale_type.length > 0) {
             filterData.sale_type.forEach((item, index) => {
                 queryParams.append(`filterdata[status][${index}]`, item);
