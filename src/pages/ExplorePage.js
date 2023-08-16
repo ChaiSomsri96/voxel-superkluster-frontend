@@ -151,7 +151,7 @@ const ExplorePage = ({colormodesettle}) => {
             colormodesettle={colormodesettle}
             clickFilterButton={handleToggleLeftFilterBar}
             onFilter={handleOnFilter}
-            isLeftFilterBarVisible={isLeftFilterBarVisible} 
+            isLeftFilterBarVisible={isLeftFilterBarVisible}
           />
         </div>
         <div style={{paddingTop: '20px', display: 'flex', gap: '25px'}}>
