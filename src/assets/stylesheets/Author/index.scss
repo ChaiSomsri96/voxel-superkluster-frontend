@@ -7,6 +7,22 @@
         width: 100%;
         height: 400px;
 
+        @media(max-width: 1600px) {
+            height: 350px;
+        }
+
+        @media(max-width: 1200px) {
+            height: 300px;
+        }
+
+        @media(max-width: 992px) {
+            height: 250px;
+        }
+
+        @media(max-width: 768px) {
+            height: 200px;
+        }
+
         border-radius: 16px;
         position: relative;
     }
@@ -23,6 +39,9 @@
         display: flex;
         justify-content: space-between;
         margin-top: 20px;
+
+        flex-wrap: wrap;
+        gap: 20px;
 
         .follow-section {
             display: flex;
