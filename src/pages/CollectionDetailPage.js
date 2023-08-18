@@ -6,7 +6,8 @@ import "./../assets/stylesheets/CollectionDetail/index.scss";
 import { ReactComponent as VerifyIcon } from "./../assets/svg/small_verify.svg";
 import { Container, CollectionName, CollectionCon, CollectionPre, CollectionFactor, SocialIconBtn,
   ColAvatar, CollectionDesc, FaTwitterIcon, FaInstagramIcon,
-  FaDiscordIcon, FaTelegramPlaneIcon, FaGlobeIcon, FaRegStarIcon, FaShareAltIcon, Splitter, ShowMoreText
+  FaDiscordIcon, FaTelegramPlaneIcon, FaGlobeIcon, FaRegStarIcon, FaShareAltIcon, Splitter, ShowMoreText,
+  FaEllipsisIcon
 } from "./../components/collection-detail/styled-components";
 import defaultAvatar from "./../assets/image/default_avatar.jpg";
 import ItemTab from "./../components/collection-detail/ItemTab";
@@ -19,12 +20,46 @@ import "./../assets/stylesheets/react-tabs.scss";
 
 import { ReactComponent as AngleDownDark } from "./../assets/svg/angle_down_dark.svg";
 import { ReactComponent as AngleUpDark } from "./../assets/svg/angle_up_dark.svg";
-
 import { ReactComponent as AngleDownLight } from "./../assets/svg/angle_down_light.svg";
 import { ReactComponent as AngleUpLight } from "./../assets/svg/angle_up_light.svg";
 
+import { Dropdown, Space } from 'antd';
 
 const CollectionDetailPage = function ({ colormodesettle }) {
+  const items = [
+    {
+      label: <a href="https://www.antgroup.com"><FaTwitterIcon /> <span style={{marginLeft: '5px'}}>Twitter</span></a>,
+      key: '0',
+    },
+    {
+      label: <a href="https://www.antgroup.com"><FaInstagramIcon /> <span style={{marginLeft: '5px'}}>Instagram</span></a>,
+      key: '1',
+    },
+    {
+      label: <a href="https://www.antgroup.com"><FaDiscordIcon /> <span style={{marginLeft: '5px'}}>Discord</span></a>,
+      key: '2',
+    },
+    {
+      label: <a href="https://www.antgroup.com"><FaTelegramPlaneIcon /> <span style={{marginLeft: '5px'}}>Telegram</span></a>,
+      key: '3',
+    },
+    {
+      label: <a href="https://www.antgroup.com"><FaGlobeIcon /> <span style={{marginLeft: '5px'}}>Website</span></a>,
+      key: '4',
+    },
+    {
+      type: 'divider',
+    },
+    {
+      label: <a href="https://www.antgroup.com"><FaRegStarIcon /> <span style={{marginLeft: '5px'}}>Watchlist</span></a>,
+      key: '5',
+    },
+    {
+      label: <a href="https://www.antgroup.com"><FaShareAltIcon /> <span style={{marginLeft: '5px'}}>Share</span></a>,
+      key: '6',
+    }
+  ];
+
   const { collectionId } = useParams();
   
   const descriptionRef = useRef(null);
@@ -114,15 +149,12 @@ const CollectionDetailPage = function ({ colormodesettle }) {
             <ColAvatar>
               <img className="col-avatar" src={isDetailData && isDetailData.avatar ? isDetailData.avatar : defaultAvatar} alt="col-avatar" />
             </ColAvatar>
-
         </div>
 
-        <div className='flex-space-between' style={{marginTop: '50px'}}>
+        <div className='collection-top-section'>
           <div>
             <CollectionName>{isDetailData && isDetailData.name ? isDetailData.name : "Unnamed"}</CollectionName>
-
             <div className='paragraph'></div>
-
             <div className='flex-align-center'>
               <CollectionPre>by</CollectionPre>
               <CollectionCon style={{marginRight: '12px'}}>&nbsp;JackBrowny</CollectionCon>
@@ -137,7 +169,7 @@ const CollectionDetailPage = function ({ colormodesettle }) {
             </div>
 
             <div className='paragraph'></div>
-            
+
             <div>
               <CollectionDesc ref={descriptionRef} className={`${showMore ? '' : 'see-less'}`}>
                 {isDetailData && isDetailData.description ? isDetailData.description : null}
@@ -176,28 +208,29 @@ const CollectionDetailPage = function ({ colormodesettle }) {
               }
             </div>
 
-            <div style={{display: 'flex', marginTop: '30px'}}>
+            <div style={{display: 'flex', marginTop: '30px', flexWrap: 'wrap', gap: '40px'}}>
               <div>
                 <CollectionFactor>{formatMarketplaceNumber(isDetailData ? isDetailData.total_assets : 0)}</CollectionFactor>
                 <CollectionPre style={{marginTop: '16px'}}>items</CollectionPre>
               </div>
 
-              <div style={{marginLeft: '40px'}}>
+              <div>
                 <CollectionFactor>{formatMarketplaceNumber(isDetailData ? isDetailData.total_owners : 0)}</CollectionFactor>
                 <CollectionPre style={{marginTop: '16px'}}>owners</CollectionPre>
               </div>
 
-              <div style={{marginLeft: '40px'}}>
+              <div>
                 <CollectionFactor>{isDetailData ? usdPriceItemDetailPage(isDetailData.floor_price) : "0.00"} USD</CollectionFactor>
                 <CollectionPre style={{marginTop: '16px'}}>floor price</CollectionPre>
               </div>
 
-              <div style={{marginLeft: '40px'}}>
+              <div>
                 <CollectionFactor>{isDetailData ? usdPriceItemDetailPage(isDetailData.usd_volume_traded) : "0.00"} USD</CollectionFactor>
                 <CollectionPre style={{marginTop: '16px'}}>volume traded</CollectionPre>
               </div>
             </div>
           </div>
+
           <div>
             <div className="social-line">
                 {
@@ -207,7 +240,9 @@ const CollectionDetailPage = function ({ colormodesettle }) {
                     <FaTwitterIcon />                  
                   </a>
                   : 
-                  null  
+                  <a href='#' target="R" className="social-icon">
+                    <FaTwitterIcon />                  
+                  </a>  
                 }
 
                 {
@@ -217,7 +252,9 @@ const CollectionDetailPage = function ({ colormodesettle }) {
                     <FaInstagramIcon />
                   </a>
                   :
-                  null
+                  <a href='#' target="R" className="social-icon">
+                    <FaInstagramIcon />
+                  </a>
                 }
 
                 {
@@ -227,7 +264,9 @@ const CollectionDetailPage = function ({ colormodesettle }) {
                     <FaDiscordIcon />
                   </a>
                   :
-                  null
+                  <a href='#' target="R" className="social-icon">
+                    <FaDiscordIcon />
+                  </a>
                 }
                 
                 {
@@ -237,7 +276,9 @@ const CollectionDetailPage = function ({ colormodesettle }) {
                     <FaTelegramPlaneIcon />
                   </a>
                   :
-                  null
+                  <a href='#' target="R" className="social-icon">
+                    <FaTelegramPlaneIcon />
+                  </a>
                 }
 
                 {
@@ -247,15 +288,32 @@ const CollectionDetailPage = function ({ colormodesettle }) {
                     <FaGlobeIcon />
                    </a>
                    :
-                   null
+                   <a href="#" target="R" className="social-icon">
+                    <FaGlobeIcon />
+                   </a>
                 }
                 <Splitter className="social-icon"></Splitter>
                 <FaRegStarIcon className="social-icon" />
                 <FaShareAltIcon className="social-icon" />
-            </div> 
+            </div>
+
+            <div className="social-dropdown">
+              <Dropdown
+                menu={{
+                  items,
+                }}
+                trigger={['click']}
+              >
+                <a onClick={(e) => e.preventDefault()}>
+                  <Space>
+                    <FaEllipsisIcon />
+                  </Space>  
+                </a>
+              </Dropdown>
+            </div>
           </div>
         </div>
-
+        
         <div style={{marginTop: '36px'}}>
           <Tabs defaultIndex={tabIndex} onSelect={(index) => selectTab(index)}>
               <TabList>
@@ -271,6 +329,7 @@ const CollectionDetailPage = function ({ colormodesettle }) {
               </TabPanel>
           </Tabs>
         </div>
+
       </div>
     </Container>
   );

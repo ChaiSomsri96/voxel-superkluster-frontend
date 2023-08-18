@@ -78,6 +78,6 @@ export const FiSearchIcon = styled(FiSearch)`
 export const RankingColumnSpan = styled.div`
   color: ${props => props.theme.primaryColor};
 
-  font-size: 17px
+  font-size: 17px;
   font-weight: 400;
 `;

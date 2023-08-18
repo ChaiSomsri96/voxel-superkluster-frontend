@@ -16,6 +16,11 @@ export const AuthorAvatar = styled.div`
     position: absolute;
     left: 20px;
     bottom: -30px;
+
+    @media(max-width: 768px) {
+        width: 100px;
+        height: 100px;
+    }
 `;
 
 export const AuthorName = styled.div`

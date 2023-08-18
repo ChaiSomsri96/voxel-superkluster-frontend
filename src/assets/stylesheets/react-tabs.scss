@@ -13,14 +13,6 @@
     padding-top: 0px;
 }
 
-.react-tabs__tab {
-    margin-left: 50px;
-}
-  
-.react-tabs__tab:first-child {
-    margin-left: 0;
-}
-
 .react-tabs__tab:focus:after {
     content: '';
     position: absolute;
@@ -38,4 +30,13 @@
     line-height: 16px;
 
     margin: 0 0 20px;
+
+    display: flex;
+    gap: 50px;
+    white-space: nowrap;
+    flex-wrap: wrap;
+
+    @media(max-width: 768px) {
+        gap: 15px;
+    }
 }

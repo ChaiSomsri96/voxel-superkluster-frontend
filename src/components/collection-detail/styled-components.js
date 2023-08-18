@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { FaTelegramPlane, FaTwitter, FaInstagram, 
     FaDiscord, FaGlobe, FaRegStar, FaShareAlt } from 'react-icons/fa';
 
+import {IoEllipsisHorizontalCircleOutline} from "react-icons/io5"
+
 import {BsChevronDown, BsChevronUp} from "react-icons/bs";
 
 export const Container = styled.div`
@@ -14,8 +16,9 @@ export const Container = styled.div`
 export const CollectionName = styled.div`
     color: ${props => props.theme.primaryColor};
     font-size: 30px;
-    line-height: 30px;
+    line-height: 36px;
     font-weight: 800;
+    word-wrap: break-word;
 `;
 
 export const CollectionCon = styled.div`
@@ -41,6 +44,18 @@ export const CollectionDesc = styled.div`
     white-space:pre-wrap;
 
     width: 900px;
+
+    @media(max-width: 1400px) {
+        width: 700px;
+    }
+
+    @media(max-width: 1110px) {
+        width: 500px;
+    }
+
+    @media(max-width: 900px) {
+        width: 100%;
+    }
 `;
 
 export const ShowMoreText = styled.div`
@@ -105,6 +120,11 @@ export const FaShareAltIcon = styled(FaShareAlt)`
     color: ${props => props.theme.primaryColor};
 `;
 
+export const FaEllipsisIcon = styled(IoEllipsisHorizontalCircleOutline)`
+    font-size: 24px;
+    color: ${props => props.theme.primaryColor};
+`;
+
 export const Splitter = styled.div`
     width: 1px;
     background: ${props => props.theme.splitterBkColor};
@@ -120,6 +140,11 @@ export const ColAvatar = styled.div`
     position: absolute;
     left: 20px;
     bottom: -30px;
+
+    @media(max-width: 768px) {
+        width: 100px;
+        height: 100px;
+    }
 `;
 
 export const ActionSection = styled.div`
@@ -149,5 +174,5 @@ export const ActionSpan = styled.div`
 `;
 
 export const ActivityColumnSpan = styled.div`
-color: ${props => props.theme.primaryColor};
+    color: ${props => props.theme.primaryColor};
 `;

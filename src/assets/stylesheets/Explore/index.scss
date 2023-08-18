@@ -9,7 +9,11 @@
     border-radius: 16px;
     padding: 0px;
 
-    @media(max-width: 1199px) {
+    @media(max-width: 1500px) {
+        height: 300px;
+    }
+
+    @media(max-width: 1200px) {
         height: 200px;
     }
 
@@ -21,7 +25,12 @@
       
         text-shadow: rgb(0 0 0 / 50%) 2px 2px 2px;
 
-        @media(max-width: 1199px) {
+        @media(max-width: 1500px) {
+            font-size: 40px;
+            line-height: 52px;
+        }
+
+        @media(max-width: 1200px) {
             font-size: 32px;
             line-height: 43px;
         }
