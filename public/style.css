@@ -13636,6 +13636,7 @@ a.read_more i {
     max-height: 100px !important;
 }
 
+/*
 .hero-image {
     max-height: 550px !important;
     transform: translate3d(0, 0, 0) perspective(300px) rotateY(-10deg) scale(.95) !important;
@@ -13647,7 +13648,7 @@ a.read_more i {
     -webkit-transition: all .6s;
     animation: animate 1s linear infinite;
     perspective: 800px;
-}
+} */
 
 
 @keyframes animate {
@@ -13660,10 +13661,10 @@ a.read_more i {
     }
 }
 
+/*
 .hero-image:hover {
     transform: translate3d(0, 0, 0) perspective(300px) rotateY(0deg) scale(1.05) !important;
-
-}
+} */
 
 
 .nft__item {

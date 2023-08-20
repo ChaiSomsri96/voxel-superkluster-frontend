@@ -63,7 +63,7 @@ const HomePage= ({colormodesettle}) => {
   return (
     <>
       <Container>
-          <BannerSection className='main-container'>
+          <BannerSection className='home-banner-container'>
             <SildPad className='v-center'>
                 <SliderMainParticle/>
             </SildPad>

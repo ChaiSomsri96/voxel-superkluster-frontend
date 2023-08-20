@@ -37,6 +37,7 @@ const GlobalStyles = createGlobalStyle`
     . {
       padding: 26px;
     }
+    /*
    .hero-image {
       max-height: 550px!important;
       transform: translate3d(0, 0, 0) perspective(300px) rotateY(-10deg) scale(.95)!important;
@@ -52,7 +53,7 @@ const GlobalStyles = createGlobalStyle`
    }
    .hero-image:hover {
       transform: translate3d(0, 0, 0) perspective(300px) rotateY(0deg) scale(1.05) !important;
-   }
+   }*/
 
   .bannerstyle .superKluster_Slide .slick-arrow {
       margin-top: 0px;
@@ -87,20 +88,6 @@ const GlobalStyles = createGlobalStyle`
         background: #f60cfe;
       }
   }
-  .bannerstyle .superKluster_Slide .slick-prev {
-      //left:2%;
-      left: 30px;  
-      &:before {
-        content: "\f104";
-      }
-  }
-  .bannerstyle .superKluster_Slide .slick-next {
-      //right:2%;
-      right: 30px;
-      &:before {
-        content: "\f105";
-      }
-  }
 `;
 
 const BigHeader = styled.div`
@@ -109,6 +96,31 @@ const BigHeader = styled.div`
   font-weight: 800;
   letter-spacing: 0px;
   line-height: 70px;
+
+  @media(max-width: 1700px) {
+    font-size: 45px;
+    line-height: 60px;
+  }
+
+  @media(max-width: 1700px) {
+    font-size: 45px;
+    line-height: 60px;
+  }
+
+  @media(max-width: 1580px) {
+    font-size: 38px;
+    line-height: 50px;
+  }
+
+  @media(max-width: 1380px) {
+    font-size: 30px;
+    line-height: 40px;
+  }
+
+  @media(max-width: 1110px) {
+    font-size: 25px;
+    line-height: 32px;
+  }
 `;
 
 const BannerDescription = styled.div`
@@ -120,6 +132,11 @@ const BannerDescription = styled.div`
 
   padding-top: 18px;
   padding-bottom: 30px;
+
+  @media(max-width: 1700px) {
+    font-size: 15px;
+    line-height: 20px;
+  }
 `; 
 
 const Slidermainparticle= () => {
@@ -168,16 +185,16 @@ const Slidermainparticle= () => {
             bannerData && bannerData.length > 0 ?
               bannerData.map((banner, index) => (
                 <div key={index}>
-                  <div className="row align-items-center" style={{padding:'0 8%'}}>
-                    <div className='col-md-6 slidermainLeft1' style ={{marginBottom:'12px'}}>
+                  <div className="banner-content">
+                    <div className='slidermainLeft1' style ={{marginBottom:'12px'}}>
                       <div className="mainStyleSlider">
                         <div className="spacer-single"></div>
                         <h6><span className="text-uppercase color" style={{letterSpacing: '-1px', fontWeight: '900'}}>{banner.small_header}</span></h6>
                         <Reveal className='onStep' keyframes={fadeInUp} delay={!isSliderEffect ? 0 : 300} duration={!isSliderEffect ? 0 : 900} triggerOnce>
                           {
-                           <BigHeader>
+                          <BigHeader>
                             {banner.big_header}
-                           </BigHeader>
+                          </BigHeader>
                           }
 
                         </Reveal>
@@ -204,12 +221,19 @@ const Slidermainparticle= () => {
                         </Reveal>
                       </div>
                     </div>
-                    <div className='col-md-6  slidermainRight1'>
-                      <a href={banner.website_link} target="_blank"><LazyLoadImage src={banner.banner} className={` ${banner.class_name} ` ?   `lazy img-fluid ${banner.class_name}  ` : "lazy img-fluid"} style={banner.class_name  && banner.class_name.includes('hero') ? {  marginTop: 50, width: '80%' ,height: 'auto', borderRadius: 10 ,marginLeft:'10%' }: {}} data-wow-delay="1.25s" alt=""/></a>
+
+                    <div className='slidermainRight1'>
+                      <div className='banner-img'>
+                        <a href={banner.website_link} target="_blank">
+                            <LazyLoadImage 
+                              src={banner.banner} 
+                              className={` ${banner.class_name} ` ?   `${banner.class_name}` : ""}  
+                              data-wow-delay="1.25s" alt="" />
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
-                
               ))
               :
               <></>
