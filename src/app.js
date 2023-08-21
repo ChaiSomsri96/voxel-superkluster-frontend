@@ -793,7 +793,8 @@ export const lightTheme = {
 
     modalBkColor: '#FFFFFF',
     modalHeaderBorderColor: '#DBDBDB',
-    clearAllHover: '#444241'
+    clearAllHover: '#444241',
+    actionFilterGradient: 'linear-gradient(0deg, rgb(255, 255, 255), rgba(255, 255, 255, 0.1))'
 }
 
 export const darkTheme = {
@@ -950,7 +951,8 @@ export const darkTheme = {
 
     modalBkColor: '#272A2E',
     modalHeaderBorderColor: '#474747',
-    clearAllHover: '#dbd9d9'
+    clearAllHover: '#dbd9d9',
+    actionFilterGradient: 'linear-gradient(0deg, rgb(0, 0, 0), rgba(0, 0, 0, 0.1));'
 }
 
 export const ScrollTop = ({ children, location }) => {
