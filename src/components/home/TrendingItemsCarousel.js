@@ -37,6 +37,10 @@ const ItemLabel = styled.div`
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
+
+    @media (max-width: 525px) {
+        padding-left: 30px;
+    }
 `
 
 const TrendingItemsCarousel = function({colormodesettle}) {
@@ -82,7 +86,7 @@ const TrendingItemsCarousel = function({colormodesettle}) {
         getTrendingItems();
     }, []);
 
-    return (
+    return ( 
         <div style={{overflow:'hidden', paddingTop: '25px'}}>
             {
                 itemData && itemData.length > 0 ?
@@ -114,10 +118,13 @@ const TrendingItemsCarousel = function({colormodesettle}) {
                                             </Link>
                                         </div>     
                                     </div>
-
-                                    <LocalButton className="view-artwork-btn" onClick={()=>moveToDetailPage(item.assetId)}>
-                                        View Artwork
-                                    </LocalButton>
+                                    
+                                    <div className="view-artwork-div">   
+                                        <LocalButton className="view-artwork-btn" onClick={()=>moveToDetailPage(item.assetId)}>
+                                            View Artwork
+                                        </LocalButton>
+                                    </div>
+                    
                                 </div>    
                             </TrendingCard>
 
