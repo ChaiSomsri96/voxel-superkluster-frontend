@@ -75,8 +75,8 @@ function NavDrawer({funcs, colormodesettle, onOpenCartModal}) {
           <Space>
             {
               colormodesettle.ColorMode ?
-              <img src='/image/logo/logo.PNG' alt='superkluster' style={{height:'33px',width:'100%'}}/>
-              :<img src='/image/logo/logo2.png' alt='superkluster' style={{height:'33px', width:'100%'}}/>
+              <img src='/image/logo/logo.PNG' alt='superkluster' style={{height:'33px',width:'161px'}}/>
+              :<img src='/image/logo/logo2.png' alt='superkluster' style={{height:'33px', width:'161px'}}/>
             }
           </Space>
         }

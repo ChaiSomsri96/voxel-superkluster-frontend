@@ -7,10 +7,11 @@ import profileImg from "./../../assets/image/profile.png";
 import { shortenWalletAddress, formatTimestamp } from "./../../utils";
 import { activityAction } from "./../../components/constants/filters";
 import { Link } from "@reach/router";
-import { ActivityColumnSpan } from "./styled-components";
+import { ActivityColumnSpan, FilterOption } from "./styled-components";
 import { BsBoxArrowUpRight } from 'react-icons/bs';
 import StickyBox from "react-sticky-box";
-
+import LocalButton from './../common/Button';
+import ActionCheckboxModal from "./../ActionCheckboxModal";
 
 const ActivityTab = ({ colormodesettle, collectionId, authorId }) => {
     const accessToken = localStorage.getItem('accessToken');
@@ -20,6 +21,9 @@ const ActivityTab = ({ colormodesettle, collectionId, authorId }) => {
     const [total, setTotal] = useState(0);
     const [activityData, setActivityData] = useState(null);
     const [filterData, setFilterData] = useState([]);
+
+    const [isActionFilterPopupOpen, SetActionFilterPopupOpen] = useState(false);
+    const [browserWidth, setBrowserWidth] = useState(window.innerWidth);
 
     const ItemColumn = ({content}) => {
         return (
@@ -151,6 +155,10 @@ const ActivityTab = ({ colormodesettle, collectionId, authorId }) => {
         //ActivityDataFunc(currentPage);
     }
 
+    const handleCancel = () => {
+        SetActionFilterPopupOpen(false);
+    };
+
     const ActivityDataFunc = async ()=>{
 
         let data = {
@@ -191,6 +199,22 @@ const ActivityTab = ({ colormodesettle, collectionId, authorId }) => {
         localStorage.setItem('usdPrice', res.data.usdPrice);
     }
 
+    useEffect(() => {
+        const handleResize = () => {
+            setBrowserWidth(window.innerWidth);
+        };
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
+    useEffect(() => {
+        if (browserWidth > 1540) {
+            SetActionFilterPopupOpen(false);
+        }
+    }, [browserWidth]);
+
     useEffect( () => {
         ActivityDataFunc() ;
         
@@ -199,7 +223,7 @@ const ActivityTab = ({ colormodesettle, collectionId, authorId }) => {
     return (
         <>
             <div className='activity-tab'>
-                <div style={{flexGrow: 1}}>
+                <div className='activity-table'>
                     <Table
                         columns={columns}
                         style={{ overflowX: 'auto' }}
@@ -221,6 +245,17 @@ const ActivityTab = ({ colormodesettle, collectionId, authorId }) => {
                         <ActionCheckbox colormodesettle={colormodesettle} onActionChange={handleActionChange} />
                     </div>
                 </StickyBox>
+
+                <FilterOption className='filter-option'>
+                    <LocalButton className="filter-btn" onClick={() => SetActionFilterPopupOpen(true)}>Filters</LocalButton>
+                </FilterOption>
+
+                <ActionCheckboxModal
+                    cartPopupOpen={isActionFilterPopupOpen}
+                    handleCancel={handleCancel}
+                    colormodesettle={colormodesettle}
+                    onActionChange={handleActionChange}
+                />
             </div>
         </>
     )

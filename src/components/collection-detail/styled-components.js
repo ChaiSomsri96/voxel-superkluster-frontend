@@ -175,4 +175,13 @@ export const ActionSpan = styled.div`
 
 export const ActivityColumnSpan = styled.div`
     color: ${props => props.theme.primaryColor};
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;    
+`;
+
+export const FilterOption = styled.div`
+    background: ${props => props.theme.actionFilterGradient};
 `;

@@ -4,16 +4,53 @@
     display: flex;
     align-items: flex-start;
     gap: 36px;
+
+    .filter-option {
+        @media(min-width: 1541px) {
+            display: none;
+        }
+
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        position: fixed;
+        width: 100%;
+
+        padding: 15px 0px;
+        
+        text-align: center;
+
+        .filter-btn {
+            width: 150px;
+        }
+    }
+
     .action-checkbox-list {
         display: flex;
         flex-direction: column;
         gap: 24px;
     }
-    
+
+    .activity-table {
+        flex-grow: 1;
+
+        @media(max-width: 1540px) {
+            width: 100%;
+        }
+    }
+
     .sticky-box {
+        @media(max-width: 1540px) {
+            display: none;
+        }
+
         padding-top: 20px;
         .action-checkbox-container {
-            width: 340px
+            width: 340px;
+
+            @media(max-width: 1590px) {
+                width: 300px;
+            }
         }
     }
 
@@ -60,14 +97,32 @@
     }
 
     .column-data {
+        max-width: 300px;
+
         display: flex;
         align-items: center;
+
+        @media(max-width: 1200px) {
+            flex-direction: column;
+            align-items: flex-start;
+        }
 
         .image-data {
             width: 70px;
             height: 70px;
+
+            @media(max-width: 768px) {
+                width: 50px;
+                height: 50px;
+            }
+
             border-radius: 50%;
             margin-right: 15px;
+
+            @media(max-width: 1200px) {
+                margin-right: 0px;
+                margin-bottom: 10px;
+            }
 
             img {
                 border-radius: 50%;
